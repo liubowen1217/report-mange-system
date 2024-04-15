@@ -1,0 +1,9 @@
+server:
+  port: 22111
+
+spring:
+  application:
+    name: report-mange-system
+
+  profiles:
+    active: druid
