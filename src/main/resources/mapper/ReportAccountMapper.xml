@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.report.mange.system.mybatis.ReportAccountMapper">
+  <resultMap id="BaseResultMap" type="com.report.mange.system.model.ReportAccount">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_acct_id" jdbcType="BIGINT" property="userAcctId" />
+    <result column="par_acct_id" jdbcType="BIGINT" property="parAcctId" />
+    <result column="u_account_name" jdbcType="BIGINT" property="uAccountName" />
+    <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
+    <result column="u_locked" jdbcType="VARCHAR" property="uLocked" />
+    <result column="u_description" jdbcType="VARCHAR" property="uDescription" />
+    <result column="u_account_type" jdbcType="VARCHAR" property="uAccountType" />
+    <result column="u_account_status" jdbcType="VARCHAR" property="uAccountStatus" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

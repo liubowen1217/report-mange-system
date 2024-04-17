@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.report.mange.system.mybatis.ReportConMapper">
+  <resultMap id="BaseResultMap" type="com.report.mange.system.model.ReportCon">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="con_id" jdbcType="BIGINT" property="conId" />
+    <result column="con_name" jdbcType="VARCHAR" property="conName" />
+    <result column="con_code" jdbcType="VARCHAR" property="conCode" />
+    <result column="con_type1" jdbcType="INTEGER" property="conType1" />
+    <result column="con_type2" jdbcType="INTEGER" property="conType2" />
+    <result column="project_report_code" jdbcType="VARCHAR" property="projectReportCode" />
+    <result column="con_year" jdbcType="INTEGER" property="conYear" />
+    <result column="con_filing_date" jdbcType="DATE" property="conFilingDate" />
+    <result column="project_sign_date" jdbcType="DATE" property="projectSignDate" />
+    <result column="business_segments" jdbcType="VARCHAR" property="businessSegments" />
+    <result column="opposite_org_name" jdbcType="VARCHAR" property="oppositeOrgName" />
+    <result column="opposite_org_code" jdbcType="VARCHAR" property="oppositeOrgCode" />
+    <result column="tax_amt" jdbcType="VARCHAR" property="taxAmt" />
+    <result column="submit_profit_rate" jdbcType="VARCHAR" property="submitProfitRate" />
+    <result column="budget_subcontract_amt" jdbcType="VARCHAR" property="budgetSubcontractAmt" />
+    <result column="sign_department" jdbcType="VARCHAR" property="signDepartment" />
+    <result column="business_map" jdbcType="VARCHAR" property="businessMap" />
+    <result column="org_address" jdbcType="VARCHAR" property="orgAddress" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+</mapper>

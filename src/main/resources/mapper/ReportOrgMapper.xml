@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.report.mange.system.mybatis.ReportOrgMapper">
+  <resultMap id="BaseResultMap" type="com.report.mange.system.model.ReportOrg">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="par_org_id" jdbcType="BIGINT" property="parOrgId" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_addr" jdbcType="VARCHAR" property="orgAddr" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="tel_number" jdbcType="VARCHAR" property="telNumber" />
+    <result column="mail_addr" jdbcType="VARCHAR" property="mailAddr" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

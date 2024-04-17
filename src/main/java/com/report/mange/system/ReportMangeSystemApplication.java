@@ -1,5 +1,6 @@
 package com.report.mange.system;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -7,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cache.annotation.EnableCaching;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
+@MapperScan("com.report.mange.system.mybatis")
 @EnableCaching
 //@ConfigurationPropertiesScan(basePackages = "com.report.mange.system.config")
 @EnableSwagger2
