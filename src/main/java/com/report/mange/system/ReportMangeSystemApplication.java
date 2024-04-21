@@ -10,23 +10,23 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @MapperScan("com.report.mange.system.mybatis")
 @EnableCaching
-//@ConfigurationPropertiesScan(basePackages = "com.report.mange.system.config")
+@ConfigurationPropertiesScan(basePackages = "com.report.mange.system.config")
 @EnableSwagger2
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class ReportMangeSystemApplication {
 
     public static void main(String[] args) {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(ReportMangeSystemApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  报表服务启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
-                "$$\\       $$$$$$$\\  $$\\      $$\\ \n"+
-                "$$ |      $$  __$$\\ $$ | $\\  $$ |\n"+
-                "$$ |      $$ |  $$ |$$ |$$$\\ $$ |\n"+
-                "$$ |      $$$$$$$\\ |$$ $$ $$\\$$ |\n"+
-                "$$ |      $$  __$$\\ $$$$  _$$$$ |\n"+
-                "$$ |      $$ |  $$ |$$$  / \\$$$ |\n"+
-                "$$$$$$$$\\ $$$$$$$  |$$  /   \\$$ |\n"+
-                "\\________|\\_______/ \\__/     \\__|\n"+
+                "$$\\       $$$$$$$\\  $$\\      $$\\ \n" +
+                "$$ |      $$  __$$\\ $$ | $\\  $$ |\n" +
+                "$$ |      $$ |  $$ |$$ |$$$\\ $$ |\n" +
+                "$$ |      $$$$$$$\\ |$$ $$ $$\\$$ |\n" +
+                "$$ |      $$  __$$\\ $$$$  _$$$$ |\n" +
+                "$$ |      $$ |  $$ |$$$  / \\$$$ |\n" +
+                "$$$$$$$$\\ $$$$$$$  |$$  /   \\$$ |\n" +
+                "\\________|\\_______/ \\__/     \\__|\n" +
                 "                               ");
     }
 

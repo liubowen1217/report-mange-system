@@ -32,25 +32,25 @@ public class ReportCostBreakdownRuleDetail {
     /**
      * 系统科目
      */
-    @Column(name = "system_subject")
-    private String systemSubject;
+    @Column(name = "sub_system_subject")
+    private String subSystemSubject;
 
     /**
      * 标准占比
      */
-    @Column(name = "standard_proportion")
-    private String standardProportion;
+    @Column(name = "sub_standard_proportion")
+    private String subStandardProportion;
 
     /**
      * 预算占比
      */
-    @Column(name = "budget_proportion")
-    private String budgetProportion;
+    @Column(name = "sub_budget_proportion")
+    private String subBudgetProportion;
 
     /**
      * 金额
      */
-    private String amount;
+    private String subAmount;
 
     /**
      * 组织机构id
@@ -61,7 +61,7 @@ public class ReportCostBreakdownRuleDetail {
     /**
      * 备注
      */
-    private String remark;
+    private String subRemark;
 
     /**
      * 逻辑删除 1.是，0.否
@@ -163,76 +163,44 @@ public class ReportCostBreakdownRuleDetail {
         this.conId = conId;
     }
 
-    /**
-     * 获取系统科目
-     *
-     * @return system_subject - 系统科目
-     */
-    public String getSystemSubject() {
-        return systemSubject;
+    public String getSubSystemSubject() {
+        return subSystemSubject;
     }
 
-    /**
-     * 设置系统科目
-     *
-     * @param systemSubject 系统科目
-     */
-    public void setSystemSubject(String systemSubject) {
-        this.systemSubject = systemSubject == null ? null : systemSubject.trim();
+    public void setSubSystemSubject(String subSystemSubject) {
+        this.subSystemSubject = subSystemSubject;
     }
 
-    /**
-     * 获取标准占比
-     *
-     * @return standard_proportion - 标准占比
-     */
-    public String getStandardProportion() {
-        return standardProportion;
+    public String getSubStandardProportion() {
+        return subStandardProportion;
     }
 
-    /**
-     * 设置标准占比
-     *
-     * @param standardProportion 标准占比
-     */
-    public void setStandardProportion(String standardProportion) {
-        this.standardProportion = standardProportion == null ? null : standardProportion.trim();
+    public void setSubStandardProportion(String subStandardProportion) {
+        this.subStandardProportion = subStandardProportion;
     }
 
-    /**
-     * 获取预算占比
-     *
-     * @return budget_proportion - 预算占比
-     */
-    public String getBudgetProportion() {
-        return budgetProportion;
+    public String getSubBudgetProportion() {
+        return subBudgetProportion;
     }
 
-    /**
-     * 设置预算占比
-     *
-     * @param budgetProportion 预算占比
-     */
-    public void setBudgetProportion(String budgetProportion) {
-        this.budgetProportion = budgetProportion == null ? null : budgetProportion.trim();
+    public void setSubBudgetProportion(String subBudgetProportion) {
+        this.subBudgetProportion = subBudgetProportion;
     }
 
-    /**
-     * 获取金额
-     *
-     * @return amount - 金额
-     */
-    public String getAmount() {
-        return amount;
+    public String getSubAmount() {
+        return subAmount;
     }
 
-    /**
-     * 设置金额
-     *
-     * @param amount 金额
-     */
-    public void setAmount(String amount) {
-        this.amount = amount == null ? null : amount.trim();
+    public void setSubAmount(String subAmount) {
+        this.subAmount = subAmount;
+    }
+
+    public String getSubRemark() {
+        return subRemark;
+    }
+
+    public void setSubRemark(String subRemark) {
+        this.subRemark = subRemark;
     }
 
     /**
@@ -253,23 +221,6 @@ public class ReportCostBreakdownRuleDetail {
         this.orgId = orgId == null ? null : orgId.trim();
     }
 
-    /**
-     * 获取备注
-     *
-     * @return remark - 备注
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * 设置备注
-     *
-     * @param remark 备注
-     */
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
 
     /**
      * 获取逻辑删除 1.是，0.否

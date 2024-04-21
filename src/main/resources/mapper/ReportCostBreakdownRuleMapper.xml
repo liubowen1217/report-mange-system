@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.report.mange.system.mybatis.ReportCostBreakdownRuleMapper">
   <resultMap id="BaseResultMap" type="com.report.mange.system.model.ReportCostBreakdownRule">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="fee_rule_id" jdbcType="BIGINT" property="feeRuleId" />
     <result column="con_id" jdbcType="BIGINT" property="conId" />
@@ -21,4 +18,63 @@
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <resultMap id="DefaultReportCostBreakdownRuleMap" type="com.report.mange.system.dto.ReportCostBreakdownRuleDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="fee_rule_id" jdbcType="BIGINT" property="feeRuleId" />
+    <result column="con_id" jdbcType="BIGINT" property="conId" />
+    <result column="fee_rule_code" jdbcType="VARCHAR" property="feeRuleCode" />
+    <result column="system_subject" jdbcType="VARCHAR" property="systemSubject" />
+    <result column="standard_proportion" jdbcType="VARCHAR" property="standardProportion" />
+    <result column="budget_proportion" jdbcType="VARCHAR" property="budgetProportion" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <collection property="detailList" javaType="java.util.List" ofType="com.report.mange.system.dto.ReportCostBreakdownRuleDetailDTO">
+      <id property="id" column="sub_id" jdbcType="BIGINT"/>
+      <result property="feeRuleDetailId" column="fee_rule_detail_id" />
+      <result property="subSystemSubject" column="sub_system_subject" />
+      <result property="subStandardProportion" column="sub_standard_proportion" />
+      <result property="subBudgetProportion" column="sub_budget_proportion" jdbcType="VARCHAR" />
+      <result property="subAmount" column="sub_amount" jdbcType="VARCHAR" />
+      <result property="subRemark" column="sub_remark" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+
+  <select id="queryDefaultReportCostBreakdownRule" resultMap="DefaultReportCostBreakdownRuleMap">
+    SELECT
+    t1.id,
+    t1.fee_rule_id,
+    t1.con_id,
+    t1.fee_rule_code,
+    t1.system_subject,
+    t1.standard_proportion,
+    t1.budget_proportion,
+    t1.amount,
+    t1.org_id,
+    t1.remark,
+    t2.id AS sub_id,
+    t2.fee_rule_detail_id,
+    t2.sub_system_subject,
+    t2.sub_standard_proportion,
+    t2.sub_budget_proportion,
+    t2.sub_amount,
+    t2.sub_remark
+    FROM
+    report_cost_breakdown_rule t1
+    INNER JOIN report_cost_breakdown_rule_detail t2 ON t1.fee_rule_id = t2.fee_rule_id
+    <where>
+      AND t2.is_deleted = 0
+      AND t1.is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="feeRuleId != null">
+        AND fee_rule_id =  #{feeRuleId}
+      </if>
+    </where>
+  </select>
+
+
 </mapper>

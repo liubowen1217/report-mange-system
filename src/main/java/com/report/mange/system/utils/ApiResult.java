@@ -43,16 +43,16 @@ public class ApiResult<T> {
         return new ApiResult(false, getErrorMessage.getStatus() + "", getErrorMessage.getMessage(), (Object) null, (String) null);
     }
 
-    public static <T> ApiResult<T> error(GetErrorMessage getErrorMessage, String errorMessage) {
-        return new ApiResult(false, getErrorMessage.getStatus() + "", errorMessage, (Object) null, (String) null);
+    public static <T> ApiResult<T> error(Integer status, String errorMessage) {
+        return new ApiResult(false, status + "", errorMessage, (Object) null, (String) null);
     }
 
-    public static <T> ApiResult<T> error(GetErrorMessage getErrorMessage, T data) {
-        return new ApiResult(false, getErrorMessage.getStatus() + "", getErrorMessage.getMessage(), data, (String) null);
+    public static <T> ApiResult<T> error(Integer status, T data) {
+        return new ApiResult(false, status + "", null, data, (String) null);
     }
 
-    public static <T> ApiResult<T> error(GetErrorMessage getErrorMessage, String errorMessage, T data) {
-        return new ApiResult(false, getErrorMessage.getStatus() + "", errorMessage, data, (String) null);
+    public static <T> ApiResult<T> error(Integer status, String errorMessage, T data) {
+        return new ApiResult(false, status + "", errorMessage, data, (String) null);
     }
 
     /**

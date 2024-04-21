@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.report.mange.system.mybatis.ReportConMapper">
   <resultMap id="BaseResultMap" type="com.report.mange.system.model.ReportCon">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="con_id" jdbcType="BIGINT" property="conId" />
     <result column="con_name" jdbcType="VARCHAR" property="conName" />
@@ -24,7 +21,253 @@
     <result column="sign_department" jdbcType="VARCHAR" property="signDepartment" />
     <result column="business_map" jdbcType="VARCHAR" property="businessMap" />
     <result column="org_address" jdbcType="VARCHAR" property="orgAddress" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
+
+  <insert id="saveReportConAdd" parameterType="com.report.mange.system.model.ReportCon">
+    insert into report_con
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="conId != null">
+        con_id,
+      </if>
+      <if test="conName != null and conName != ''">
+        con_name,
+      </if>
+      <if test="conCode != null and conCode != ''">
+        con_code,
+      </if>
+      <if test="conType1 != null">
+        con_type1,
+      </if>
+      <if test="conType2 != null">
+        con_type2,
+      </if>
+      <if test="projectReportCode != null and projectReportCode != ''">
+        project_report_code,
+      </if>
+      <if test="conYear != null">
+        con_year,
+      </if>
+      <if test="conFilingDate != null">
+        con_filing_date,
+      </if>
+      <if test="projectSignDate != null">
+        project_sign_date,
+      </if>
+      <if test="businessSegments != null and businessSegments != ''">
+        business_segments,
+      </if>
+      <if test="oppositeOrgName != null and oppositeOrgName != ''">
+        opposite_org_name,
+      </if>
+      <if test="oppositeOrgCode != null and oppositeOrgCode != ''">
+        opposite_org_code,
+      </if>
+      <if test="taxAmt != null and taxAmt != ''">
+        tax_amt,
+      </if>
+      <if test="submitProfitRate != null and submitProfitRate != ''">
+        submit_profit_rate,
+      </if>
+      <if test="budgetSubcontractAmt != null and budgetSubcontractAmt != ''">
+        budget_subcontract_amt,
+      </if>
+      <if test="signDepartment != null and signDepartment != ''">
+        sign_department,
+      </if>
+      <if test="businessMap != null and businessMap != ''">
+        business_map,
+      </if>
+      <if test="orgAddress != null and orgAddress != ''">
+        org_address,
+      </if>
+      <if test="creator != null and creator != ''">
+        creator,
+      </if>
+      <if test="modifier != null and modifier != ''">
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="conId != null">
+        #{conId},
+      </if>
+      <if test="conName != null and conName != ''">
+        #{conName},
+      </if>
+      <if test="conCode != null and conCode != ''">
+        #{conCode},
+      </if>
+      <if test="conType1 != null">
+        #{conType1},
+      </if>
+      <if test="conType2 != null">
+        #{conType2},
+      </if>
+      <if test="projectReportCode != null and projectReportCode != ''">
+        #{projectReportCode},
+      </if>
+      <if test="conYear != null">
+        #{conYear},
+      </if>
+      <if test="conFilingDate != null">
+        #{conFilingDate},
+      </if>
+      <if test="projectSignDate != null">
+        #{projectSignDate},
+      </if>
+      <if test="businessSegments != null and businessSegments != ''">
+        #{businessSegments},
+      </if>
+      <if test="oppositeOrgCode != null and oppositeOrgCode != ''">
+        #{oppositeOrgCode},
+      </if>
+      <if test="oppositeOrgName != null and oppositeOrgName != ''">
+        #{oppositeOrgName},
+      </if>
+      <if test="taxAmt != null and taxAmt != ''">
+        #{taxAmt},
+      </if>
+      <if test="submitProfitRate != null and submitProfitRate != ''">
+        #{submitProfitRate},
+      </if>
+      <if test="budgetSubcontractAmt != null and budgetSubcontractAmt != ''">
+        #{budgetSubcontractAmt},
+      </if>
+      <if test="signDepartment != null and signDepartment != ''">
+        #{signDepartment},
+      </if>
+      <if test="businessMap != null and businessMap != ''">
+        #{businessMap},
+      </if>
+      <if test="orgAddress != null and orgAddress != ''">
+        #{orgAddress},
+      </if>
+      <if test="creator != null and creator != ''">
+        #{creator},
+      </if>
+      <if test="modifier != null and modifier != ''">
+        #{modifier},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="saveReportConModify" parameterType="com.report.mange.system.model.ReportCon">
+    UPDATE report_con
+    <set>
+      <if test="conName != null and conName != ''">
+        con_name = #{conName},
+      </if>
+      <if test="conCode != null and conCode != ''">
+        con_code = #{conCode},
+      </if>
+      <if test="conType1 != null">
+        con_type1 = #{conType1},
+      </if>
+      <if test="conName != null and conName != ''">
+        con_type2 = #{conName},
+      </if>
+      <if test="conType2 != null">
+        conName = #{conName},
+      </if>
+      <if test="projectReportCode != null and projectReportCode != ''">
+        project_report_code = #{projectReportCode},
+      </if>
+      <if test="conYear != null">
+        con_year = #{conYear},
+      </if>
+      <if test="conFilingDate != null">
+        con_filing_date = #{conFilingDate},
+      </if>
+      <if test="projectSignDate != null">
+        project_sign_date = #{projectSignDate},
+      </if>
+      <if test="businessSegments != null and businessSegments != ''">
+        business_segments = #{businessSegments},
+      </if>
+      <if test="oppositeOrgName != null and oppositeOrgName != ''">
+        opposite_org_name = #{oppositeOrgName},
+      </if>
+      <if test="oppositeOrgCode != null and oppositeOrgCode != ''">
+        opposite_org_code = #{oppositeOrgCode},
+      </if>
+      <if test="taxAmt != null and taxAmt != ''">
+        tax_amt = #{taxAmt},
+      </if>
+      <if test="submitProfitRate != null and submitProfitRate != ''">
+        submit_profit_rate = #{submitProfitRate},
+      </if>
+      <if test="budgetSubcontractAmt != null and budgetSubcontractAmt != ''">
+        budget_subcontract_amt = #{budgetSubcontractAmt},
+      </if>
+      <if test="signDepartment != null and signDepartment != ''">
+        sign_department = #{signDepartment},
+      </if>
+      <if test="businessMap != null and businessMap != ''">
+        business_map = #{businessMap},
+      </if>
+      <if test="orgAddress != null and orgAddress != ''">
+        org_address = #{orgAddress},
+      </if>
+      <if test="modifier != null and modifier != ''">
+        modifier = #{modifier},
+      </if>
+    </set>
+    <where>
+      <if test="id != null ">
+        AND id = #{id}
+      </if>
+      <if test="conId != null ">
+        AND con_id = #{conId}
+      </if>
+    </where>
+  </update>
+
+
+  <select id="queryReportCon" resultType="com.report.mange.system.model.ReportCon" parameterType="com.report.mange.system.query.ReportConQuery">
+    SELECT
+      id,
+      con_id,
+      con_name,
+      con_code,
+      con_type1,
+      con_type2,
+      project_report_code,
+      con_year,
+      con_filing_date,
+      project_sign_date,
+      business_segments,
+      opposite_org_name,
+      opposite_org_code,
+      tax_amt,
+      submit_profit_rate,
+      budget_subcontract_amt,
+      sign_department,
+      business_map,
+      org_address,
+      modifier,
+      modify_time,
+      creator,
+      create_time
+    FROM
+    report_con
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="conName != null and conName != ''">
+        AND con_name =  like concat('%', #{conName}, '%')
+      </if>
+      <if test="orgAddress != null and orgAddress != ''">
+        AND org_address =  like concat('%', #{orgAddress}, '%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

@@ -12,11 +12,15 @@ mybatis:
 spring:
   main:
     allow-bean-definition-overriding: true
+    allow-circular-references: true
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+    servlet:
+      load-on-startup: 1
   application:
     name: cmc-general-operate
+
 
   profiles:
     active: druid

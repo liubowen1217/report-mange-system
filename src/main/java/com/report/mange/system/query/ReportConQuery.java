@@ -1,10 +1,12 @@
-package com.report.mange.system.model;
+package com.report.mange.system.query;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "report_con")
-public class ReportCon {
+public class ReportConQuery extends BaseQuery {
     /**
      * id
      */
