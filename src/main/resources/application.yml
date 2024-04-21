@@ -20,3 +20,9 @@ spring:
 
   profiles:
     active: druid
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: false
+  params: count=countSql
