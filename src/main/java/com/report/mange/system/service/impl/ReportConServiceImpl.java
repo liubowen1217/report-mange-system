@@ -4,6 +4,7 @@ import com.report.mange.system.model.ReportCon;
 import com.report.mange.system.mybatis.ReportConMapper;
 import com.report.mange.system.query.ReportConQuery;
 import com.report.mange.system.service.ReportConService;
+import com.report.mange.system.utils.SnowflakeManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +20,8 @@ public class ReportConServiceImpl implements ReportConService {
 
     @Resource
     private ReportConMapper reportConMapper;
+    @Resource
+    private SnowflakeManager snowflakeManager;
 
 
     /**
@@ -29,6 +32,7 @@ public class ReportConServiceImpl implements ReportConService {
      */
     @Override
     public Integer saveReportConAdd(ReportCon reportCon) {
+        reportCon.setConId(snowflakeManager.nextValue());
         return reportConMapper.saveReportConAdd(reportCon);
     }
 

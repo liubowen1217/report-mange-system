@@ -1,5 +1,7 @@
 package com.report.mange.system.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -57,12 +59,14 @@ public class ReportCon {
      * 合同备案日期
      */
     @Column(name = "con_filing_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date conFilingDate;
 
     /**
      * 合同签约日期
      */
     @Column(name = "project_sign_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date projectSignDate;
 
     /**
@@ -139,6 +143,7 @@ public class ReportCon {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
@@ -150,6 +155,7 @@ public class ReportCon {
      * 修改时间
      */
     @Column(name = "modify_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
     /**

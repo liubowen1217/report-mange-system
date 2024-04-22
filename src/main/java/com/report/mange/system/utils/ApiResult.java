@@ -15,28 +15,28 @@ public class ApiResult<T> {
             value = "返回码",
             dataType = "int"
     )
-    private String type;
+    private String status;
     private String resultHint;
-    private T resultValue;
+    private T data;
     private String errorPage;
 
     public ApiResult() {
     }
 
-    private ApiResult(boolean successful, String type, String resultHint, T resultValue, String errorPage) {
+    private ApiResult(boolean successful, String status, String resultHint, T data, String errorPage) {
         this.successful = successful;
-        this.type = type;
-        this.resultValue = resultValue;
+        this.status = status;
+        this.data = data;
         this.resultHint = resultHint;
         this.errorPage = errorPage;
     }
 
     public static <T> ApiResult<T> ok() {
-        return new ApiResult(true, (String) null, (String) null, (Object) null, (String) null);
+        return new ApiResult(true, (String) "200", (String) null, (Object) null, (String) null);
     }
 
     public static <T> ApiResult<T> ok(T data) {
-        return new ApiResult(true, (String) null, (String) null, data, (String) null);
+        return new ApiResult(true, (String) "200", (String) null, data, (String) null);
     }
 
     public static <T> ApiResult<T> error(GetErrorMessage getErrorMessage) {
@@ -71,12 +71,12 @@ public class ApiResult<T> {
         this.successful = successful;
     }
 
-    public String getType() {
-        return this.type;
+    public String getStatus() {
+        return status;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getResultHint() {
@@ -87,12 +87,12 @@ public class ApiResult<T> {
         this.resultHint = resultHint;
     }
 
-    public T getResultValue() {
-        return this.resultValue;
+    public T getData() {
+        return data;
     }
 
-    public void setResultValue(T resultValue) {
-        this.resultValue = resultValue;
+    public void setData(T data) {
+        this.data = data;
     }
 
     public String getErrorPage() {
