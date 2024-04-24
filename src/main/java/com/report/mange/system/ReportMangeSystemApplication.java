@@ -1,5 +1,6 @@
 package com.report.mange.system;
 
+import cn.dev33.satoken.SaTokenManager;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ public class ReportMangeSystemApplication {
     public static void main(String[] args) {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(ReportMangeSystemApplication.class, args);
+        System.out.println("启动成功：sa-token配置如下：" + SaTokenManager.getConfig());
         System.out.println("(♥◠‿◠)ﾉﾞ  报表服务启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
                 "$$\\       $$$$$$$\\  $$\\      $$\\ \n" +
                 "$$ |      $$  __$$\\ $$ | $\\  $$ |\n" +
