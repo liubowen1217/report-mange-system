@@ -27,7 +27,7 @@ public class ReportAccount {
      * 用户账号名称
      */
     @Column(name = "u_account_name")
-    private Long uAccountName;
+    private String uAccountName;
 
     /**
      * 用户密码
@@ -157,7 +157,7 @@ public class ReportAccount {
      *
      * @return u_account_name - 用户账号名称
      */
-    public Long getuAccountName() {
+    public String getuAccountName() {
         return uAccountName;
     }
 
@@ -166,7 +166,7 @@ public class ReportAccount {
      *
      * @param uAccountName 用户账号名称
      */
-    public void setuAccountName(Long uAccountName) {
+    public void setuAccountName(String uAccountName) {
         this.uAccountName = uAccountName;
     }
 

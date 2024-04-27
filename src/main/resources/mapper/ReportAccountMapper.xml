@@ -22,4 +22,25 @@
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <select id="getUserAccountInfo" resultType="com.report.mange.system.dto.UserAccountDTO" parameterType="com.report.mange.system.model.ReportAccount">
+    SELECT
+    t1.id,
+    t1.user_acct_id,
+    t1.u_account_name,
+    t1.u_password,
+    t2.u_name
+    FROM
+    report_account t1
+    INNER JOIN report_user t2 ON t1.user_id = t2.user_id AND t2.is_deleted = 0
+    <where>
+      AND t1.is_deleted = 0
+      <if test="userAcctId != null">
+        AND t1.user_acct_id = #{userAcctId}
+      </if>
+      <if test="uAccountName != null and uAccountName != ''">
+        AND t1.u_account_name =  #{uAccountName}
+      </if>
+    </where>
+  </select>
 </mapper>

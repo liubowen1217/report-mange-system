@@ -39,8 +39,8 @@ public class ApiResult<T> {
         return new ApiResult(true, (String) "200", (String) null, data, (String) null);
     }
 
-    public static <T> ApiResult<T> error(GetErrorMessage getErrorMessage) {
-        return new ApiResult(false, getErrorMessage.getStatus() + "", getErrorMessage.getMessage(), (Object) null, (String) null);
+    public static <T> ApiResult<T> error(String getErrorMessage) {
+        return new ApiResult(false, 500 + "", getErrorMessage, (Object) null, (String) null);
     }
 
     public static <T> ApiResult<T> error(Integer status, String errorMessage) {

@@ -1,15 +1,18 @@
 package com.report.mange.system.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
+import com.report.mange.system.dto.UserAccountDTO;
 import com.report.mange.system.model.ReportCon;
 import com.report.mange.system.mybatis.ReportConMapper;
 import com.report.mange.system.query.ReportConQuery;
 import com.report.mange.system.service.ReportConService;
 import com.report.mange.system.utils.SnowflakeManager;
 import com.report.mange.system.vo.ReportConVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +22,7 @@ import java.util.List;
  */
 @Service
 public class ReportConServiceImpl implements ReportConService {
-
+    Logger logger = LoggerFactory.getLogger(ReportConServiceImpl.class);
     @Resource
     private ReportConMapper reportConMapper;
     @Resource
@@ -70,6 +73,8 @@ public class ReportConServiceImpl implements ReportConService {
      */
     @Override
     public List<ReportConVO> queryAllReportCon() {
+        UserAccountDTO user = (UserAccountDTO) StpUtil.getSession().get("user");
+        logger.info(user.getuName());
         return reportConMapper.queryAllReportCon();
     }
 }
