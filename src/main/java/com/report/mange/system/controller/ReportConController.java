@@ -6,6 +6,7 @@ import com.report.mange.system.model.ReportCon;
 import com.report.mange.system.query.ReportConQuery;
 import com.report.mange.system.service.ReportConService;
 import com.report.mange.system.utils.ApiResult;
+import com.report.mange.system.vo.ReportConVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -64,5 +65,16 @@ public class ReportConController {
         List<ReportCon> list = reportConService.queryReportCon(query);
         PageInfo<ReportCon> pageInfo = new PageInfo<ReportCon>(list);
         return ApiResult.ok(pageInfo);
+    }
+
+
+    /**
+     * @Description: 查询全部合同
+     */
+    @ApiOperation("queryAllReportCon")
+    @PostMapping("/queryAllReportCon")
+    public ApiResult<List<ReportConVO>> queryAllReportCon() throws Exception {
+        List<ReportConVO> list = reportConService.queryAllReportCon();
+        return ApiResult.ok(list);
     }
 }

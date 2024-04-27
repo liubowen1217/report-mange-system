@@ -5,9 +5,11 @@ import com.report.mange.system.mybatis.ReportConMapper;
 import com.report.mange.system.query.ReportConQuery;
 import com.report.mange.system.service.ReportConService;
 import com.report.mange.system.utils.SnowflakeManager;
+import com.report.mange.system.vo.ReportConVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,5 +60,16 @@ public class ReportConServiceImpl implements ReportConService {
     @Override
     public List<ReportCon> queryReportCon(ReportConQuery query) {
         return reportConMapper.queryReportCon(query);
+    }
+
+
+    /**
+     * 查询所有合同信息
+     *
+     * @return
+     */
+    @Override
+    public List<ReportConVO> queryAllReportCon() {
+        return reportConMapper.queryAllReportCon();
     }
 }

@@ -2,6 +2,7 @@ package com.report.mange.system.service;
 
 import com.report.mange.system.model.ReportCon;
 import com.report.mange.system.query.ReportConQuery;
+import com.report.mange.system.vo.ReportConVO;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface ReportConService {
 
     List<ReportCon> queryReportCon(ReportConQuery query);
 
-
+    List<ReportConVO> queryAllReportCon();
 }

@@ -169,11 +169,8 @@
       <if test="conType1 != null">
         con_type1 = #{conType1},
       </if>
-      <if test="conName != null and conName != ''">
-        con_type2 = #{conName},
-      </if>
-      <if test="conType2 != null">
-        conName = #{conName},
+      <if test="conType1 != null">
+        con_type2 = #{conType2},
       </if>
       <if test="projectReportCode != null and projectReportCode != ''">
         project_report_code = #{projectReportCode},
@@ -254,6 +251,28 @@
       modify_time,
       creator,
       create_time
+    FROM
+    report_con
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="conName != null and conName != ''">
+        AND con_name =  like concat('%', #{conName}, '%')
+      </if>
+      <if test="orgAddress != null and orgAddress != ''">
+        AND org_address =  like concat('%', #{orgAddress}, '%')
+      </if>
+    </where>
+  </select>
+
+
+
+  <select id="queryAllReportCon" resultType="com.report.mange.system.vo.ReportConVO">
+    SELECT
+    con_name,
+    con_code
     FROM
     report_con
     <where>
