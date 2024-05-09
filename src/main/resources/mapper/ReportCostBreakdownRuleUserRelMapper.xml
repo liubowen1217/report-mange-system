@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="fee_rule_id" jdbcType="BIGINT" property="feeRuleId" />
+    <result column="fee_rule_detail_id" jdbcType="BIGINT" property="feeRuleDetailId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
@@ -15,4 +15,52 @@
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <select id="queryReportCostBreakdownRuleUser" resultType="java.lang.String" parameterType="java.lang.Long">
+    SELECT
+     t2.u_name
+    FROM
+    report_cost_breakdown_rule_user_rel t1
+    INNER JOIN  report_user t2 ON t1.user_id = t2.user_id
+    <where>
+      AND t2.is_deleted = 0
+      <if test="feeRuleDetailId != null">
+        AND t1.fee_rule_detail_id = #{feeRuleDetailId}
+      </if>
+    </where>
+    GROUP t2.u_name
+  </select>
+
+  <insert id="saveReportCostBreakdownRuleUserRelAdd" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleUserRel">
+    insert into report_cost_breakdown_rule_user_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="feeRuleDetailId != null">
+        fee_rule_detail_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="creator != null and creator != ''">
+        creator,
+      </if>
+      <if test="modifier != null and modifier != ''">
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feeRuleDetailId != null">
+        #{feeRuleDetailId},
+      </if>
+      <if test="userId != null">
+        #{userId},
+      </if>
+      <if test="creator != null and creator != ''">
+        #{creator},
+      </if>
+      <if test="modifier != null and modifier != ''">
+        #{modifier},
+      </if>
+    </trim>
+  </insert>
 </mapper>

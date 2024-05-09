@@ -18,4 +18,75 @@
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <select id="queryReportCostBreakdownRuleDetail" resultType="com.report.mange.system.model.ReportCostBreakdownRuleDetail" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleDetail">
+    SELECT
+    fee_rule_detail_id,
+    fee_rule_id,
+    con_id,
+    sub_system_subject,
+    sub_standard_proportion,
+    sub_budget_proportion,
+    sub_amount,
+    org_id,
+    sub_remark,
+    FROM
+    report_cost_breakdown_rule_detail
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="feeRuleId != null">
+        AND fee_rule_id = #{feeRuleId}
+      </if>
+    </where>
+  </select>
+
+  <delete id="saveReportCostBreakdownRuleDetailDel" parameterType="java.lang.Long">
+    DELETE
+    FROM report_cost_breakdown_rule_detail
+    WHERE con_id = #{con_id}
+  </delete>
+
+
+  <insert id="saveReportCostBreakdownRuleDetailAdd" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleDetail">
+    insert into report_cost_breakdown_rule_user_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="feeRuleDetailId != null">
+        fee_rule_detail_id,
+      </if>
+      <if test="feeRuleId != null">
+        fee_rule_id,
+      </if>
+      <if test="conId != null">
+        con_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="creator != null and creator != ''">
+        creator,
+      </if>
+      <if test="modifier != null and modifier != ''">
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feeRuleDetailId != null">
+        #{feeRuleDetailId},
+      </if>
+      <if test="userId != null">
+        #{userId},
+      </if>
+      <if test="creator != null and creator != ''">
+        #{creator},
+      </if>
+      <if test="modifier != null and modifier != ''">
+        #{modifier},
+      </if>
+    </trim>
+  </insert>
+
 </mapper>

@@ -59,7 +59,7 @@ public class ReportCostBreakdownRuleDTO {
     /**
      * 费用规则明细
      */
-    List<ReportCostBreakdownRuleDetail> detailList;
+    List<ReportCostBreakdownRuleDetailDTO> detailList;
 
 
     /**
@@ -242,11 +242,11 @@ public class ReportCostBreakdownRuleDTO {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public List<ReportCostBreakdownRuleDetail> getDetailList() {
+    public List<ReportCostBreakdownRuleDetailDTO> getDetailList() {
         return detailList;
     }
 
-    public void setDetailList(List<ReportCostBreakdownRuleDetail> detailList) {
+    public void setDetailList(List<ReportCostBreakdownRuleDetailDTO> detailList) {
         this.detailList = detailList;
     }
 }

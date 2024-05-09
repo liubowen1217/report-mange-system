@@ -68,13 +68,39 @@
       AND t2.is_deleted = 0
       AND t1.is_deleted = 0
       <if test="conId != null">
-        AND con_id = #{conId}
+        AND t1.con_id = #{conId}
       </if>
       <if test="feeRuleId != null">
-        AND fee_rule_id =  #{feeRuleId}
+        AND t1.fee_rule_id =  #{feeRuleId}
       </if>
     </where>
   </select>
 
+  <select id="queryReportCostBreakdownRule" resultType="com.report.mange.system.model.ReportCostBreakdownRule" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    fee_rule_id,
+    con_id,
+    fee_rule_code,
+    system_subject,
+    standard_proportion,
+    budget_proportion,
+    amount,
+    org_id,
+    remark
+    FROM
+    report_cost_breakdown_rule
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+    </where>
+  </select>
+
+  <delete id="saveReportCostBreakdownRuleDel" parameterType="java.lang.Long">
+    DELETE
+    FROM report_cost_breakdown_rule
+    WHERE con_id = #{con_id}
+  </delete>
 
 </mapper>

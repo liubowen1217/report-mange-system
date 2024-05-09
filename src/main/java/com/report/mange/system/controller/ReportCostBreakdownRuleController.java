@@ -1,6 +1,7 @@
 package com.report.mange.system.controller;
 
 import com.report.mange.system.dto.ReportCostBreakdownRuleDTO;
+import com.report.mange.system.dto.ReportCostBreakdownRuleSaveDTO;
 import com.report.mange.system.dto.ReportCostBreakdownRuleVO;
 import com.report.mange.system.model.ReportCostBreakdownRule;
 import com.report.mange.system.service.ReportCostBreakdownRuleService;
@@ -29,7 +30,7 @@ public class ReportCostBreakdownRuleController {
 
     @ApiOperation("新增费用明细信息")
     @PostMapping("/saveReportCostBreakdownRuleAdd")
-    public ApiResult<Integer> insert(@RequestBody List<ReportCostBreakdownRuleVO> reportCostBreakdownRule) throws Exception {
+    public ApiResult<Integer> insert(@RequestBody ReportCostBreakdownRuleSaveDTO reportCostBreakdownRule) throws Exception {
         try {
             reportCostBreakdownRuleService.saveReportCostBreakdownRuleAdd(reportCostBreakdownRule);
         } catch (Exception e) {
@@ -38,20 +39,20 @@ public class ReportCostBreakdownRuleController {
         }
         return ApiResult.ok();
     }
-//
-//    @ApiOperation("deleteById")
-//    @PostMapping("/deleteById")
-//    public ApiResult<Integer> deleteById(@RequestParam String id) throws Exception {
-//        Integer state = reportCostBreakdownRuleService.deleteById(id);
-//        return ApiResult.ok(state);
-//    }
-//
-//    @ApiOperation("update")
-//    @PostMapping("/update")
-//    public ApiResult<Integer> update(ReportCostBreakdownRule reportCostBreakdownRule) throws Exception {
-//        Integer state = reportCostBreakdownRuleService.update(reportCostBreakdownRule);
-//        return ApiResult.ok(state);
-//    }
+
+
+    /**
+     * 查询费用明细信息
+     *
+     * @return
+     * @throws Exception
+     */
+    @ApiOperation("查询费用明细信息")
+    @PostMapping("/queryReportCostBreakdownRule")
+    public ApiResult<List<ReportCostBreakdownRuleDTO>> queryReportCostBreakdownRule(@RequestBody ReportCostBreakdownRule rule) throws Exception {
+        List<ReportCostBreakdownRuleDTO> resultList = reportCostBreakdownRuleService.queryReportCostBreakdownRule(rule);
+        return ApiResult.ok(resultList);
+    }
 
     /**
      * 查询默认的费用明细信息
@@ -59,9 +60,9 @@ public class ReportCostBreakdownRuleController {
      * @return
      * @throws Exception
      */
-    @ApiOperation("queryDefaultReportCostBreakdownRule")
+    @ApiOperation("查询默认的费用明细信息")
     @PostMapping("/queryDefaultReportCostBreakdownRule")
-    public ApiResult<List<ReportCostBreakdownRuleDTO>> selectById() throws Exception {
+    public ApiResult<List<ReportCostBreakdownRuleDTO>> queryDefaultReportCostBreakdownRule() throws Exception {
         List<ReportCostBreakdownRuleDTO> resultList = reportCostBreakdownRuleService.queryDefaultReportCostBreakdownRule();
         return ApiResult.ok(resultList);
     }
