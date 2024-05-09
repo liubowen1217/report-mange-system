@@ -73,8 +73,8 @@ public class ReportConServiceImpl implements ReportConService {
      */
     @Override
     public List<ReportConVO> queryAllReportCon() {
-        UserAccountDTO user = (UserAccountDTO) StpUtil.getSession().get("user");
-        logger.info(user.getuName());
+//        UserAccountDTO user = (UserAccountDTO) StpUtil.getSession().get("user");
+//        logger.info(user.getuName());
         return reportConMapper.queryAllReportCon();
     }
 

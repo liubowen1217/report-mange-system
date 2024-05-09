@@ -1,6 +1,7 @@
 package com.report.mange.system.service;
 
 import com.report.mange.system.dto.ReportCostBreakdownRuleDTO;
+import com.report.mange.system.dto.ReportCostBreakdownRuleVO;
 
 import java.util.List;
 
@@ -12,5 +13,7 @@ import java.util.List;
 public interface ReportCostBreakdownRuleService {
 
     List<ReportCostBreakdownRuleDTO> queryDefaultReportCostBreakdownRule();
+
+    Integer saveReportCostBreakdownRuleAdd(List<ReportCostBreakdownRuleVO> reportCostBreakdownRule);
 
 }

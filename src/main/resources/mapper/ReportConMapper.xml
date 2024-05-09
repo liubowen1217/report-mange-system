@@ -228,41 +228,42 @@
 
   <select id="queryReportCon" resultType="com.report.mange.system.model.ReportCon" parameterType="com.report.mange.system.query.ReportConQuery">
     SELECT
-      id,
-      con_id,
-      con_name,
-      con_code,
-      con_type1,
-      con_type2,
-      project_report_code,
-      con_year,
-      con_filing_date,
-      project_sign_date,
-      business_segments,
-      opposite_org_name,
-      opposite_org_code,
-      tax_amt,
-      submit_profit_rate,
-      budget_subcontract_amt,
-      sign_department,
-      business_map,
-      org_address,
-      modifier,
-      modify_time,
-      creator,
-      create_time
+      t1. id,
+      t1.con_id,
+      t1.con_name,
+      t1.con_code,
+      t1.con_type1,
+      t1.con_type2,
+      t1.project_report_code,
+      t1.con_year,
+      t1.con_filing_date,
+      t1.project_sign_date,
+      t1.business_segments,
+      t1.opposite_org_name,
+      t1.opposite_org_code,
+      t1.tax_amt,
+      t1.submit_profit_rate,
+      t1.budget_subcontract_amt,
+      t1.sign_department,
+      t1.business_map,
+      t2.FULL_NAME AS org_address,
+      t1.modifier,
+      t1.modify_time,
+      t1.creator,
+      t1.create_time
     FROM
-    report_con
+    report_con t1
+    INNER JOIN  district_info t2 ON t1.org_address = t2.CODE
     <where>
-      AND is_deleted = 0
+      AND t1.is_deleted = 0
       <if test="conId != null">
-        AND con_id = #{conId}
+        AND t1.con_id = #{conId}
       </if>
       <if test="conName != null and conName != ''">
-        AND con_name =  like concat('%', #{conName}, '%')
+        AND t1.con_name =  like concat('%', #{conName}, '%')
       </if>
       <if test="orgAddress != null and orgAddress != ''">
-        AND org_address =  like concat('%', #{orgAddress}, '%')
+        AND t1.org_address = = #{orgAddress}
       </if>
     </where>
   </select>

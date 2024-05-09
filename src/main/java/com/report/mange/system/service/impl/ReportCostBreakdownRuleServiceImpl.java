@@ -1,6 +1,7 @@
 package com.report.mange.system.service.impl;
 
 import com.report.mange.system.dto.ReportCostBreakdownRuleDTO;
+import com.report.mange.system.dto.ReportCostBreakdownRuleVO;
 import com.report.mange.system.mybatis.ReportCostBreakdownRuleMapper;
 import com.report.mange.system.service.ReportCostBreakdownRuleService;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,24 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
     @Resource
     private ReportCostBreakdownRuleMapper reportCostBreakdownRuleMapper;
 
+
+    /**
+     * 查询费用规则信息
+     *
+     * @return
+     */
     @Override
     public List<ReportCostBreakdownRuleDTO> queryDefaultReportCostBreakdownRule() {
         return reportCostBreakdownRuleMapper.queryDefaultReportCostBreakdownRule();
+    }
+
+    /**
+     * 新增费用规则信息
+     *
+     * @return
+     */
+    @Override
+    public Integer saveReportCostBreakdownRuleAdd(List<ReportCostBreakdownRuleVO> reportCostBreakdownRule) {
+        return null;
     }
 }
