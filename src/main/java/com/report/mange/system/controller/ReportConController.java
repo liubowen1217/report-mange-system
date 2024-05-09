@@ -29,7 +29,7 @@ public class ReportConController {
     @Resource
     private ReportConService reportConService;
 
-    @ApiOperation("saveReportConAdd")
+    @ApiOperation("新增合同信息")
     @PostMapping("/saveReportConAdd")
     public ApiResult<Integer> saveReportConAdd(@RequestBody ReportCon reportCon) throws Exception {
         try {
@@ -41,7 +41,7 @@ public class ReportConController {
         return ApiResult.ok();
     }
 
-    @ApiOperation("saveReportConModify")
+    @ApiOperation("编辑合同信息")
     @PostMapping("/saveReportConModify")
     public ApiResult<Integer> saveReportConModify(@RequestBody ReportCon reportCon) throws Exception {
         try {
@@ -58,7 +58,7 @@ public class ReportConController {
      * @Description: 分页查询
      * @Reutrn ApiResult<PageInfo < ReportCon>>
      */
-    @ApiOperation("queryReportCon")
+    @ApiOperation("分页查询合同信息")
     @PostMapping("/queryReportCon")
     public ApiResult<PageInfo<ReportCon>> queryReportCon(@RequestBody ReportConQuery query) throws Exception {
         PageHelper.startPage(query.getPageNum(), query.getPageSize());
@@ -67,11 +67,23 @@ public class ReportConController {
         return ApiResult.ok(pageInfo);
     }
 
+    /**
+     * @Description: 分页查询
+     * @Reutrn ApiResult<PageInfo < ReportCon>>
+     */
+    @ApiOperation("查询指定合同信息")
+    @PostMapping("/queryReportConById")
+    public ApiResult<ReportCon> queryReportConById(@RequestBody ReportConQuery query) throws Exception {
+        PageHelper.startPage(query.getPageNum(), query.getPageSize());
+        ReportCon reportCon = reportConService.queryReportConById(query);
+        return ApiResult.ok(reportCon);
+    }
+
 
     /**
      * @Description: 查询全部合同
      */
-    @ApiOperation("queryAllReportCon")
+    @ApiOperation("查询全部合同信息")
     @PostMapping("/queryAllReportCon")
     public ApiResult<List<ReportConVO>> queryAllReportCon() throws Exception {
         List<ReportConVO> list = reportConService.queryAllReportCon();

@@ -1,5 +1,9 @@
 package com.report.mange.system.service;
 
+import com.report.mange.system.model.ReportUser;
+
+import java.util.List;
+
 /**
  * @author 刘博文
  * @Description: ReportUserService接口
@@ -7,4 +11,5 @@ package com.report.mange.system.service;
  */
 public interface ReportUserService {
 
+    List<ReportUser> getUserInfo(ReportUser user);
 }

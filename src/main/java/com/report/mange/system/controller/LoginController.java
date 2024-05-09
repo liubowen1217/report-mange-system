@@ -50,4 +50,34 @@ public class LoginController {
         return ApiResult.error("登录失败");
     }
 
+    @ApiOperation("注册")
+    @PostMapping("/regist")
+    public ApiResult<Integer> regist(@RequestBody UserAccountDTO account) throws Exception {
+        if (StringUtils.isBlank(account.getuName())) {
+            ApiResult.error("用户姓名不能为空");
+        }
+        if (StringUtils.isBlank(account.getDeptCode())) {
+            ApiResult.error("用户单位不能为空");
+        }
+        if (StringUtils.isBlank(account.getuAccountName())) {
+            ApiResult.error("用户名不能为空");
+        }
+        if (StringUtils.isBlank(account.getuPassword())) {
+            ApiResult.error("密码不能为空");
+        }
+
+        //查询数据库 看用户名是否已经存在
+        ReportAccount reportAccount = new ReportAccount();
+        reportAccount.setuAccountName(account.getuAccountName());
+        List<ReportAccount> accountList = accountService.getUserAccountBynName(reportAccount);
+        if (accountList.size() > 0) {
+            return ApiResult.error("当前用户名已存在");
+        }
+
+        //存储用户信息
+        accountService.regist(account);
+
+        return ApiResult.error("登录失败");
+    }
+
 }

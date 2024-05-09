@@ -20,4 +20,7 @@ public interface ReportConService {
     List<ReportCon> queryReportCon(ReportConQuery query);
 
     List<ReportConVO> queryAllReportCon();
+
+
+    ReportCon queryReportConById(ReportConQuery query);
 }

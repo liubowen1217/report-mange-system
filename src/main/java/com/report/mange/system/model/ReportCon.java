@@ -1,6 +1,8 @@
 package com.report.mange.system.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +19,7 @@ public class ReportCon {
      * 合同ID
      */
     @Column(name = "con_id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long conId;
 
     /**
@@ -53,6 +56,7 @@ public class ReportCon {
      * 合同所属年份
      */
     @Column(name = "con_year")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Integer conYear;
 
     /**

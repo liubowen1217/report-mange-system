@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface ReportAccountMapper extends Mapper<ReportAccount> {
     List<UserAccountDTO> getUserAccountInfo(ReportAccount account);
+
+    List<ReportAccount> getUserAccountBynName(ReportAccount account);
+
 }

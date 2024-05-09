@@ -77,4 +77,22 @@ public class ReportConServiceImpl implements ReportConService {
         logger.info(user.getuName());
         return reportConMapper.queryAllReportCon();
     }
+
+    /**
+     * 指定合同查询
+     *
+     * @return
+     */
+    @Override
+    public ReportCon queryReportConById(ReportConQuery query) {
+        ReportCon reportCon = new ReportCon();
+        if (query.getConId() == null) {
+            return reportCon;
+        }
+        List<ReportCon> result = reportConMapper.queryReportCon(query);
+        if (result.size() > 0) {
+            reportCon = result.get(0);
+        }
+        return reportCon;
+    }
 }

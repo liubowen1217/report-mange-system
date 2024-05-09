@@ -28,6 +28,16 @@ public class UserAccountDTO {
     @Column(name = "u_name")
     private String uName;
 
+    /**
+     * 单位编码
+     */
+    private String deptCode;
+    /**
+     * 单位名称
+     */
+    private String deptName;
+
+
     public String getuAccountName() {
         return uAccountName;
     }
@@ -58,5 +68,21 @@ public class UserAccountDTO {
 
     public void setUserAcctId(Long userAcctId) {
         this.userAcctId = userAcctId;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 }

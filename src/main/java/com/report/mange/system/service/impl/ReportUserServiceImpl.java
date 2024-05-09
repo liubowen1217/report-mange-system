@@ -1,10 +1,12 @@
 package com.report.mange.system.service.impl;
 
+import com.report.mange.system.model.ReportUser;
 import com.report.mange.system.mybatis.ReportUserMapper;
 import com.report.mange.system.service.ReportUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 刘博文
@@ -17,4 +19,15 @@ public class ReportUserServiceImpl implements ReportUserService {
     @Resource
     private ReportUserMapper reportUserMapper;
 
+
+    /**
+     * 查询用户信息
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public List<ReportUser> getUserInfo(ReportUser user) {
+        return reportUserMapper.getUserInfo(user);
+    }
 }

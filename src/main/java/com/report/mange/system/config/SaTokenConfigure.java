@@ -12,9 +12,9 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册Sa-Token的路由拦截器，并排除登录接口或其他可匿名访问的接口地址 (与注解拦截器无关)
-        registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
-                .addPathPatterns("/**")
-                .excludePathPatterns("/swagger-resources/**", "/swagger-ui.html/**")
-                .excludePathPatterns("/login/doLogin");
+//        registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/swagger-resources/**", "/swagger-ui.html/**")
+//                .excludePathPatterns("/login/doLogin");
     }
 }

@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.report.mange.system.mybatis.ReportUserMapper">
   <resultMap id="BaseResultMap" type="com.report.mange.system.model.ReportUser">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="u_sex" jdbcType="TINYINT" property="uSex" />
@@ -23,4 +20,98 @@
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <select id="getUserInfo" resultMap="BaseResultMap" parameterType="com.report.mange.system.model.ReportUser">
+    SELECT
+    id,
+    user_id,
+    u_name,
+    u_idcard,
+    FROM
+    report_user
+    <where>
+      AND is_deleted = 0
+      <if test="userId != null">
+        AND user_id = #{userId}
+      </if>
+      <if test="uName != null and uName != ''">
+        AND u_name =  #{uName}
+      </if>
+    </where>
+  </select>
+
+  <insert id="saveUserInfoAdd" parameterType="com.report.mange.system.model.ReportUser">
+    insert into report_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="uSex != null and uSex != ''">
+        u_sex,
+      </if>
+      <if test="uBirthday != null and uBirthday != ''">
+        u_birthday,
+      </if>
+      <if test="uTelephone != null and uTelephone != ''">
+        u_telephone,
+      </if>
+      <if test="uEmail != null and uEmail != ''">
+        u_email,
+      </if>
+      <if test="uAddress != null and uAddress != ''">
+        u_address,
+      </if>
+      <if test="uName != null and uName != ''">
+        u_name,
+      </if>
+      <if test="uIdtype != null and uIdtype != ''">
+        u_idtype,
+      </if>
+      <if test="uIdcard != null and uIdcard != ''">
+        u_idcard,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId},
+      </if>
+      <if test="uSex != null and uSex != ''">
+        #{uSex},
+      </if>
+      <if test="uBirthday != null and uBirthday != ''">
+        #{uBirthday},
+      </if>
+      <if test="uTelephone != null and uTelephone != ''">
+        #{uTelephone},
+      </if>
+      <if test="uEmail != null and uEmail != ''">
+        #{uEmail},
+      </if>
+      <if test="uAddress != null and uAddress != ''">
+        #{uAddress},
+      </if>
+      <if test="uName != null and uName != ''">
+        #{uName},
+      </if>
+      <if test="uIdtype != null and uIdtype != ''">
+        #{uIdtype},
+      </if>
+      <if test="uIdcard != null and uIdcard != ''">
+        #{uIdcard},
+      </if>
+      <if test="deptId != null">
+        #{deptId},
+      </if>
+      <if test="orgId != null">
+        #{orgId},
+      </if>
+    </trim>
+  </insert>
 </mapper>

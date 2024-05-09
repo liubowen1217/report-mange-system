@@ -15,7 +15,7 @@ public class ApiResult<T> {
             value = "返回码",
             dataType = "int"
     )
-    private String status;
+    private Integer status;
     private String resultHint;
     private T data;
     private String errorPage;
@@ -23,7 +23,7 @@ public class ApiResult<T> {
     public ApiResult() {
     }
 
-    private ApiResult(boolean successful, String status, String resultHint, T data, String errorPage) {
+    private ApiResult(boolean successful, Integer status, String resultHint, T data, String errorPage) {
         this.successful = successful;
         this.status = status;
         this.data = data;
@@ -32,34 +32,34 @@ public class ApiResult<T> {
     }
 
     public static <T> ApiResult<T> ok() {
-        return new ApiResult(true, (String) "200", (String) null, (Object) null, (String) null);
+        return new ApiResult(true, 200, (String) null, (Object) null, (String) null);
     }
 
     public static <T> ApiResult<T> ok(T data) {
-        return new ApiResult(true, (String) "200", (String) null, data, (String) null);
+        return new ApiResult(true, 200, (String) null, data, (String) null);
     }
 
     public static <T> ApiResult<T> error(String getErrorMessage) {
-        return new ApiResult(false, 500 + "", getErrorMessage, (Object) null, (String) null);
+        return new ApiResult(false, 500, getErrorMessage, (Object) null, (String) null);
     }
 
     public static <T> ApiResult<T> error(Integer status, String errorMessage) {
-        return new ApiResult(false, status + "", errorMessage, (Object) null, (String) null);
+        return new ApiResult(false, status, errorMessage, (Object) null, (String) null);
     }
 
     public static <T> ApiResult<T> error(Integer status, T data) {
-        return new ApiResult(false, status + "", null, data, (String) null);
+        return new ApiResult(false, status, null, data, (String) null);
     }
 
     public static <T> ApiResult<T> error(Integer status, String errorMessage, T data) {
-        return new ApiResult(false, status + "", errorMessage, data, (String) null);
+        return new ApiResult(false, status, errorMessage, data, (String) null);
     }
 
     /**
      * @deprecated
      */
     @Deprecated
-    public static <T> ApiResult<T> error(String code, String errorMessage, T data, String errorPage) {
+    public static <T> ApiResult<T> error(Integer code, String errorMessage, T data, String errorPage) {
         return new ApiResult(false, code, errorMessage, data, errorPage);
     }
 
@@ -71,11 +71,11 @@ public class ApiResult<T> {
         this.successful = successful;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
