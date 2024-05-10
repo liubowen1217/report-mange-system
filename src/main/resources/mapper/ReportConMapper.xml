@@ -253,7 +253,7 @@
       t1.create_time
     FROM
     report_con t1
-    INNER JOIN  district_info t2 ON t1.org_address = t2.CODE
+    LEFT JOIN  district_info t2 ON t1.org_address = t2.CODE
     <where>
       AND t1.is_deleted = 0
       <if test="conId != null">

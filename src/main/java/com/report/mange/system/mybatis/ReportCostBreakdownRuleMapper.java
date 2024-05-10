@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ReportCostBreakdownRuleMapper extends Mapper<ReportCostBreakdownRule> {
 
-    List<ReportCostBreakdownRuleDTO> queryDefaultReportCostBreakdownRule();
+    List<ReportCostBreakdownRuleDTO> queryDefaultReportCostBreakdownRule(ReportCostBreakdownRule rule);
 
     List<ReportCostBreakdownRule> queryReportCostBreakdownRule(ReportCostBreakdownRule rule);
 

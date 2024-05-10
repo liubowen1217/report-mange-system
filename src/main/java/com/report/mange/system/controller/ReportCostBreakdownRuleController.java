@@ -66,4 +66,19 @@ public class ReportCostBreakdownRuleController {
         List<ReportCostBreakdownRuleDTO> resultList = reportCostBreakdownRuleService.queryDefaultReportCostBreakdownRule();
         return ApiResult.ok(resultList);
     }
+
+
+
+    /**
+     * 查询默认的费用明细信息
+     *
+     * @return
+     * @throws Exception
+     */
+    @ApiOperation("查询调整记录")
+    @PostMapping("/queryAdjustingRecords")
+    public ApiResult<List<ReportCostBreakdownRuleDTO>> queryAdjustingRecords() throws Exception {
+        List<ReportCostBreakdownRuleDTO> resultList = reportCostBreakdownRuleService.queryDefaultReportCostBreakdownRule();
+        return ApiResult.ok(resultList);
+    }
 }

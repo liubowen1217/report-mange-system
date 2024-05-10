@@ -50,13 +50,14 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
 
 
     /**
-     * 查询默认费用规则信息
+     * 查询费用规则下拉
      *
      * @return
      */
     @Override
     public List<ReportCostBreakdownRuleDTO> queryDefaultReportCostBreakdownRule() {
-        return reportCostBreakdownRuleMapper.queryDefaultReportCostBreakdownRule();
+        ReportCostBreakdownRule rule = new ReportCostBreakdownRule();
+        return reportCostBreakdownRuleMapper.queryDefaultReportCostBreakdownRule(rule);
     }
 
     /**
@@ -79,7 +80,9 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
         List<ReportCostBreakdownRule> breakdownRule = reportCostBreakdownRuleMapper.queryReportCostBreakdownRule(rule1);
         //如果当前合同没有费用规则明细则返回默认值
         if (breakdownRule.size() == 0) {
-            return reportCostBreakdownRuleMapper.queryDefaultReportCostBreakdownRule();
+            ReportCostBreakdownRule rule2 = new ReportCostBreakdownRule();
+            rule2.setConId(1L);
+            return reportCostBreakdownRuleMapper.queryDefaultReportCostBreakdownRule(rule2);
         }
 
         //如果有费用明细则查询所有的费用明细规则信息
@@ -119,8 +122,8 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
                 pUserNameSet.addAll(userSet);
                 pDeptNameSet.addAll(deptSet);
             }
-            String pUserName =  pUserNameSet.stream().collect(Collectors.joining(" "));
-            String pDeptName =  pDeptNameSet.stream().collect(Collectors.joining(" "));
+            String pUserName = pUserNameSet.stream().collect(Collectors.joining(" "));
+            String pDeptName = pDeptNameSet.stream().collect(Collectors.joining(" "));
             breakdownRuleDTO.setpDeptName(pDeptName);
             breakdownRuleDTO.setpUserName(pUserName);
             breakdownRuleDTO.setDetailList(detailList);
