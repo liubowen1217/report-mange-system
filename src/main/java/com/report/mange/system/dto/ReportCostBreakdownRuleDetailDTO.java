@@ -3,6 +3,7 @@ package com.report.mange.system.dto;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,11 +67,11 @@ public class ReportCostBreakdownRuleDetailDTO {
     /**
      * 人员列表
      */
-    List<String> userList;
+    List<String> userList = new ArrayList<>();
     /**
      * 部门列表
      */
-    List<String> deptList;
+    List<String> deptList= new ArrayList<>();
 
     public Long getFeeRuleDetailId() {
         return feeRuleDetailId;
