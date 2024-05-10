@@ -15,6 +15,11 @@ public class ReportCostBreakdownRuleDetailVO {
      */
     private Long feeRuleDetailId;
 
+    /**
+     * 费用规则明细编码
+     */
+    @Column(name = "sub_fee_rule_code")
+    private Long subFeeRuleCode;
 
     /**
      * 系统科目
@@ -119,5 +124,13 @@ public class ReportCostBreakdownRuleDetailVO {
 
     public void setDeptList(List<String> deptList) {
         this.deptList = deptList;
+    }
+
+    public Long getSubFeeRuleCode() {
+        return subFeeRuleCode;
+    }
+
+    public void setSubFeeRuleCode(Long subFeeRuleCode) {
+        this.subFeeRuleCode = subFeeRuleCode;
     }
 }

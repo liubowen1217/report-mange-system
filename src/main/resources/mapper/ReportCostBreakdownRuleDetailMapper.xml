@@ -24,6 +24,7 @@
     fee_rule_detail_id,
     fee_rule_id,
     con_id,
+    sub_fee_rule_code,
     sub_system_subject,
     sub_standard_proportion,
     sub_budget_proportion,
@@ -66,6 +67,9 @@
       <if test="subSystemSubject != null and subSystemSubject != ''">
         sub_system_subject,
       </if>
+      <if test="subFeeRuleCode != null and subFeeRuleCode != ''">
+        sub_fee_rule_code,
+      </if>
       <if test="subStandardProportion != null and subStandardProportion != ''">
         sub_standard_proportion,
       </if>
@@ -98,6 +102,9 @@
       <if test="subSystemSubject != null and subSystemSubject != ''">
         #{subSystemSubject},
       </if>
+      <if test="subFeeRuleCode != null and subFeeRuleCode != ''">
+        #{subFeeRuleCode},
+      </if>
       <if test="subStandardProportion != null and subStandardProportion != ''">
         #{subStandardProportion},
       </if>
@@ -118,5 +125,20 @@
       </if>
     </trim>
   </insert>
+
+
+  <select id="queryBreakdownRuleDetailDrop" resultType="com.report.mange.system.vo.BreakdownRuleDetailVO" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    t1.sub_fee_rule_code,
+    t1.sub_system_subject
+    FROM
+    report_cost_breakdown_rule_detail t1
+    INNER JOIN  report_cost_breakdown_rule t2 ON t1.fee_rule_id = t2.fee_rule_id
+    <where>
+        AND t1.is_deleted = 0
+        AND t2.con_id = 1
+        AND t2.fee_rule_code = #{feeRuleCode}
+    </where>
+  </select>
 
 </mapper>

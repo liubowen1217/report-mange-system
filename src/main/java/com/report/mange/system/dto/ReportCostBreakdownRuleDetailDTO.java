@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "report_cost_breakdown_rule_detail")
 public class ReportCostBreakdownRuleDetailDTO {
@@ -17,6 +18,11 @@ public class ReportCostBreakdownRuleDetailDTO {
     @Column(name = "fee_rule_detail_id")
     private Long feeRuleDetailId;
 
+    /**
+     * 费用规则明细编码
+     */
+    @Column(name = "sub_fee_rule_code")
+    private Long subFeeRuleCode;
 
     /**
      * 系统科目
@@ -56,6 +62,15 @@ public class ReportCostBreakdownRuleDetailDTO {
      * 单位名称
      */
     private String deptName;
+
+    /**
+     * 人员列表
+     */
+    List<String> userList;
+    /**
+     * 部门列表
+     */
+    List<String> deptList;
 
     public Long getFeeRuleDetailId() {
         return feeRuleDetailId;
@@ -127,5 +142,29 @@ public class ReportCostBreakdownRuleDetailDTO {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+    public List<String> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<String> userList) {
+        this.userList = userList;
+    }
+
+    public List<String> getDeptList() {
+        return deptList;
+    }
+
+    public void setDeptList(List<String> deptList) {
+        this.deptList = deptList;
+    }
+
+    public Long getSubFeeRuleCode() {
+        return subFeeRuleCode;
+    }
+
+    public void setSubFeeRuleCode(Long subFeeRuleCode) {
+        this.subFeeRuleCode = subFeeRuleCode;
     }
 }

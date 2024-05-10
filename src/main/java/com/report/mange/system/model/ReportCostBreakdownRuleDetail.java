@@ -30,6 +30,13 @@ public class ReportCostBreakdownRuleDetail {
     private Long conId;
 
     /**
+     * 费用规则明细编码
+     */
+    @Column(name = "sub_fee_rule_code")
+    private Long subFeeRuleCode;
+
+
+    /**
      * 系统科目
      */
     @Column(name = "sub_system_subject")
@@ -310,5 +317,13 @@ public class ReportCostBreakdownRuleDetail {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getSubFeeRuleCode() {
+        return subFeeRuleCode;
+    }
+
+    public void setSubFeeRuleCode(Long subFeeRuleCode) {
+        this.subFeeRuleCode = subFeeRuleCode;
     }
 }

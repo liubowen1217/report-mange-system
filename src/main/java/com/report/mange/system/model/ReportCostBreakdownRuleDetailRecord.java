@@ -24,6 +24,18 @@ public class ReportCostBreakdownRuleDetailRecord {
     private Long feeRuleId;
 
     /**
+     * 费用规则code
+     */
+    @Column(name = "record_code")
+    private String recordCode;
+
+    /**
+     * 费用规则明细编码
+     */
+    @Column(name = "sub_fee_rule_code")
+    private Long subFeeRuleCode;
+
+    /**
      * 合同ID
      */
     @Column(name = "con_id")
@@ -361,5 +373,21 @@ public class ReportCostBreakdownRuleDetailRecord {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getRecordCode() {
+        return recordCode;
+    }
+
+    public void setRecordCode(String recordCode) {
+        this.recordCode = recordCode;
+    }
+
+    public Long getSubFeeRuleCode() {
+        return subFeeRuleCode;
+    }
+
+    public void setSubFeeRuleCode(Long subFeeRuleCode) {
+        this.subFeeRuleCode = subFeeRuleCode;
     }
 }

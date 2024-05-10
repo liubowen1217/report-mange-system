@@ -1,10 +1,15 @@
 package com.report.mange.system.controller;
 
+import com.report.mange.system.dto.AdjustingRecordDTO;
 import com.report.mange.system.dto.ReportCostBreakdownRuleDTO;
 import com.report.mange.system.dto.ReportCostBreakdownRuleSaveDTO;
 import com.report.mange.system.model.ReportCostBreakdownRule;
+import com.report.mange.system.model.ReportCostBreakdownRuleRecord;
 import com.report.mange.system.service.ReportCostBreakdownRuleService;
 import com.report.mange.system.utils.ApiResult;
+import com.report.mange.system.vo.BreakdownRuleDetailVO;
+import com.report.mange.system.vo.BreakdownRuleVO;
+import com.report.mange.system.vo.ReportDeptVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -68,17 +73,51 @@ public class ReportCostBreakdownRuleController {
     }
 
 
-
     /**
-     * 查询默认的费用明细信息
+     * 查询调整记录
      *
      * @return
      * @throws Exception
      */
     @ApiOperation("查询调整记录")
     @PostMapping("/queryAdjustingRecords")
-    public ApiResult<List<ReportCostBreakdownRuleDTO>> queryAdjustingRecords() throws Exception {
-        List<ReportCostBreakdownRuleDTO> resultList = reportCostBreakdownRuleService.queryDefaultReportCostBreakdownRule();
+    public ApiResult<List<AdjustingRecordDTO>> queryAdjustingRecords(@RequestBody ReportCostBreakdownRule rule) throws Exception {
+        List<AdjustingRecordDTO> resultList = reportCostBreakdownRuleService.queryAdjustingRecords(rule);
         return ApiResult.ok(resultList);
+    }
+
+
+    /**
+     * 查询变更费用明细信息
+     *
+     * @return
+     * @throws Exception
+     */
+    @ApiOperation("查询变更费用明细信息")
+    @PostMapping("/queryAdjustingRecordDetail")
+    public ApiResult<List<ReportCostBreakdownRuleDTO>> queryAdjustingRecordDetail(@RequestBody ReportCostBreakdownRuleRecord rule) throws Exception {
+        List<ReportCostBreakdownRuleDTO> resultList = reportCostBreakdownRuleService.queryAdjustingRecordDetail(rule);
+        return ApiResult.ok(resultList);
+    }
+
+
+    /**
+     * @Description: 查询费用规则下拉
+     */
+    @ApiOperation("查询费用规则下拉")
+    @PostMapping("/queryBreakdownRuleDrop")
+    public ApiResult<List<BreakdownRuleVO>> queryBreakdownRuleDrop() throws Exception {
+        List<BreakdownRuleVO> list = reportCostBreakdownRuleService.queryBreakdownRuleDrop();
+        return ApiResult.ok(list);
+    }
+
+    /**
+     * @Description: 查询费用明细下拉
+     */
+    @ApiOperation("查询费用明细下拉")
+    @PostMapping("/queryBreakdownRuleDetailDrop")
+    public ApiResult<List<BreakdownRuleDetailVO>> queryBreakdownRuleDetailDrop(@RequestBody ReportCostBreakdownRule rule) throws Exception {
+        List<BreakdownRuleDetailVO> list = reportCostBreakdownRuleService.queryBreakdownRuleDetailDrop(rule);
+        return ApiResult.ok(list);
     }
 }

@@ -32,6 +32,9 @@
       <if test="feeRuleCode != null and feeRuleCode != ''">
         fee_rule_code,
       </if>
+      <if test="recordCode != null and recordCode != ''">
+        record_code,
+      </if>
       <if test="systemSubject != null and systemSubject != ''">
         system_subject,
       </if>
@@ -64,6 +67,9 @@
       <if test="feeRuleCode != null and feeRuleCode != ''">
         #{feeRuleCode},
       </if>
+      <if test="recordCode != null and recordCode != ''">
+        #{recordCode},
+      </if>
       <if test="systemSubject != null and systemSubject != ''">
         #{systemSubject},
       </if>
@@ -87,4 +93,46 @@
       </if>
     </trim>
   </insert>
+
+  <select id="queryAdjustingRecords" resultType="com.report.mange.system.dto.AdjustingRecordDTO" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    t1.record_code,
+    t1.creator,
+    t1.create_time,
+    t1.remark
+    FROM
+    `report_cost_breakdown_rule_record` t1
+    INNER JOIN ( SELECT MAX( create_time ) AS create_time FROM report_cost_breakdown_rule_record WHERE con_id = #{conId} GROUP BY record_code ) t2 ON t1.create_time = t2.create_time
+    <where>
+      AND t1.is_deleted = 0
+      AND con_id = #{conId}
+      GROUP BY
+      t1.record_code
+    </where>
+  </select>
+
+
+  <select id="queryReportCostBreakdownRecordRule" resultType="com.report.mange.system.model.ReportCostBreakdownRuleRecord" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleRecord">
+    SELECT
+    fee_rule_id,
+    con_id,
+    fee_rule_code,
+    system_subject,
+    standard_proportion,
+    budget_proportion,
+    amount,
+    remark
+    FROM
+    report_cost_breakdown_rule_record
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="recordCode != null and recordCode != ''">
+        AND record_code = #{recordCode}
+      </if>
+    </where>
+  </select>
+
 </mapper>

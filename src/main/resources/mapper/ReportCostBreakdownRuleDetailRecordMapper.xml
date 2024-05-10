@@ -6,6 +6,7 @@
     <result column="fee_rule_detail_id" jdbcType="BIGINT" property="feeRuleDetailId" />
     <result column="fee_rule_id" jdbcType="BIGINT" property="feeRuleId" />
     <result column="con_id" jdbcType="BIGINT" property="conId" />
+    <result column="sub_fee_rule_code" jdbcType="VARCHAR" property="subFeeRuleCode" />
     <result column="sub_system_subject" jdbcType="VARCHAR" property="subSystemSubject" />
     <result column="sub_standard_proportion" jdbcType="VARCHAR" property="subStandardProportion" />
     <result column="sub_budget_proportion" jdbcType="VARCHAR" property="subBudgetProportion" />
@@ -31,6 +32,12 @@
       </if>
       <if test="conId != null">
         con_id,
+      </if>
+      <if test="recordCode != null and recordCode != ''">
+        record_code,
+      </if>
+      <if test="subFeeRuleCode != null and subFeeRuleCode != ''">
+        sub_fee_rule_code,
       </if>
       <if test="subSystemSubject != null and subSystemSubject != ''">
         sub_system_subject,
@@ -64,6 +71,12 @@
       <if test="conId != null">
         #{conId},
       </if>
+      <if test="recordCode != null and recordCode != ''">
+        #{recordCode},
+      </if>
+      <if test="subFeeRuleCode != null and subFeeRuleCode != ''">
+        #{subFeeRuleCode},
+      </if>
       <if test="subSystemSubject != null and subSystemSubject != ''">
         #{subSystemSubject},
       </if>
@@ -87,4 +100,29 @@
       </if>
     </trim>
   </insert>
+
+  <select id="queryReportCostBreakdownRuleDetailRecord" resultType="com.report.mange.system.model.ReportCostBreakdownRuleDetailRecord" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleDetailRecord">
+    SELECT
+    fee_rule_detail_id,
+    fee_rule_id,
+    con_id,
+    sub_system_subject,
+    sub_fee_rule_code,
+    sub_standard_proportion,
+    sub_budget_proportion,
+    sub_amount,
+    org_id,
+    sub_remark
+    FROM
+    report_cost_breakdown_rule_detail_record
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="feeRuleId != null">
+        AND fee_rule_id = #{feeRuleId}
+      </if>
+    </where>
+  </select>
 </mapper>

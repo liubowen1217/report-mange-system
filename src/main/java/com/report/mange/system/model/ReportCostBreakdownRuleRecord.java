@@ -23,6 +23,13 @@ public class ReportCostBreakdownRuleRecord {
     @Column(name = "con_id")
     private Long conId;
 
+
+    /**
+     * 费用规则code
+     */
+    @Column(name = "record_code")
+    private String recordCode;
+
     /**
      * 费用规则code
      */
@@ -359,5 +366,13 @@ public class ReportCostBreakdownRuleRecord {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getRecordCode() {
+        return recordCode;
+    }
+
+    public void setRecordCode(String recordCode) {
+        this.recordCode = recordCode;
     }
 }

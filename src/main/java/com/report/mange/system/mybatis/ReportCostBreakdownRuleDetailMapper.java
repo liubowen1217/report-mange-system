@@ -1,7 +1,9 @@
 package com.report.mange.system.mybatis;
 
 
+import com.report.mange.system.model.ReportCostBreakdownRule;
 import com.report.mange.system.model.ReportCostBreakdownRuleDetail;
+import com.report.mange.system.vo.BreakdownRuleDetailVO;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -15,4 +17,6 @@ public interface ReportCostBreakdownRuleDetailMapper extends Mapper<ReportCostBr
 
 
     Integer saveReportCostBreakdownRuleDetailAdd(ReportCostBreakdownRuleDetail detail);
+
+    List<BreakdownRuleDetailVO> queryBreakdownRuleDetailDrop(ReportCostBreakdownRule rule);
 }

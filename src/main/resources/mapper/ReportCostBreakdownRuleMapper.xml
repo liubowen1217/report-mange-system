@@ -33,6 +33,7 @@
     <collection property="detailList" javaType="java.util.List" ofType="com.report.mange.system.dto.ReportCostBreakdownRuleDetailDTO">
       <id property="id" column="sub_id" jdbcType="BIGINT"/>
       <result property="feeRuleDetailId" column="fee_rule_detail_id" />
+      <result property="subFeeRuleCode" column="sub_fee_rule_code" />
       <result property="subSystemSubject" column="sub_system_subject" />
       <result property="subStandardProportion" column="sub_standard_proportion" />
       <result property="subBudgetProportion" column="sub_budget_proportion" jdbcType="VARCHAR" />
@@ -55,6 +56,7 @@
     t1.org_id,
     t1.remark,
     t2.id AS sub_id,
+    t2.sub_fee_rule_code,
     t2.fee_rule_detail_id,
     t2.sub_system_subject,
     t2.sub_standard_proportion,
@@ -172,4 +174,16 @@
     </trim>
   </insert>
 
+
+  <select id="queryBreakdownRuleDrop" resultType="com.report.mange.system.vo.BreakdownRuleVO">
+    SELECT
+    fee_rule_code,
+    system_subject
+    FROM
+    report_cost_breakdown_rule
+    <where>
+      AND is_deleted = 0
+      AND con_id = 1
+    </where>
+  </select>
 </mapper>
