@@ -1,6 +1,7 @@
 package com.report.mange.system.dto;
 
-import javax.persistence.Id;
+import com.report.mange.system.vo.ReportCostBreakdownRuleVO;
+
 import javax.persistence.Table;
 import java.util.List;
 

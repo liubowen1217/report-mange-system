@@ -1,6 +1,7 @@
 package com.report.mange.system.service;
 
 import com.report.mange.system.model.ReportUser;
+import com.report.mange.system.vo.ReportUserVO;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ import java.util.List;
 public interface ReportUserService {
 
     List<ReportUser> getUserInfo(ReportUser user);
+
+    List<ReportUserVO> queryAllUser();
 }

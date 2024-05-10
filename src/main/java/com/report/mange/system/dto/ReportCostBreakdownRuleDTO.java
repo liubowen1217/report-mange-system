@@ -57,6 +57,18 @@ public class ReportCostBreakdownRuleDTO {
     private String remark;
 
     /**
+     * 部门名称
+     */
+    private String pDeptName;
+
+
+    /**
+     * 人员名称
+     */
+    private String pUserName;
+
+
+    /**
      * 费用规则明细
      */
     List<ReportCostBreakdownRuleDetailDTO> detailList;
@@ -248,5 +260,21 @@ public class ReportCostBreakdownRuleDTO {
 
     public void setDetailList(List<ReportCostBreakdownRuleDetailDTO> detailList) {
         this.detailList = detailList;
+    }
+
+    public String getpDeptName() {
+        return pDeptName;
+    }
+
+    public void setpDeptName(String pDeptName) {
+        this.pDeptName = pDeptName;
+    }
+
+    public String getpUserName() {
+        return pUserName;
+    }
+
+    public void setpUserName(String pUserName) {
+        this.pUserName = pUserName;
     }
 }

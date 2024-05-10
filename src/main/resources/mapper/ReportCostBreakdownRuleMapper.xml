@@ -100,7 +100,76 @@
   <delete id="saveReportCostBreakdownRuleDel" parameterType="java.lang.Long">
     DELETE
     FROM report_cost_breakdown_rule
-    WHERE con_id = #{con_id}
+    WHERE con_id = #{conId}
   </delete>
+
+  <insert id="saveReportCostBreakdownRuleAdd" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleDetail">
+    insert into report_cost_breakdown_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="feeRuleId != null">
+        fee_rule_id,
+      </if>
+      <if test="conId != null">
+        con_id,
+      </if>
+      <if test="feeRuleCode != null and feeRuleCode != ''">
+        fee_rule_code,
+      </if>
+      <if test="systemSubject != null and systemSubject != ''">
+        system_subject,
+      </if>
+      <if test="standardProportion != null and standardProportion != ''">
+        standard_proportion,
+      </if>
+      <if test="budgetProportion != null and budgetProportion != ''">
+        budget_proportion,
+      </if>
+      <if test="amount != null and amount != ''">
+        amount,
+      </if>
+      <if test="remark != null and remark != ''">
+        remark,
+      </if>
+      <if test="creator != null and creator != ''">
+        creator,
+      </if>
+      <if test="modifier != null and modifier != ''">
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feeRuleId != null">
+        #{feeRuleId},
+      </if>
+      <if test="conId != null">
+        #{conId},
+      </if>
+      <if test="feeRuleCode != null and feeRuleCode != ''">
+        #{feeRuleCode},
+      </if>
+      <if test="systemSubject != null and systemSubject != ''">
+        #{systemSubject},
+      </if>
+      <if test="standardProportion != null and standardProportion != ''">
+        #{standardProportion},
+      </if>
+      <if test="budgetProportion != null and budgetProportion != ''">
+        #{budgetProportion},
+      </if>
+      <if test="amount != null and amount != ''">
+        #{amount},
+      </if>
+      <if test="remark != null and remark != ''">
+        #{remark},
+      </if>
+      <if test="creator != null and creator != ''">
+        #{creator},
+      </if>
+      <if test="modifier != null and modifier != ''">
+        #{modifier},
+      </if>
+    </trim>
+  </insert>
 
 </mapper>

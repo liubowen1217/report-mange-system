@@ -114,4 +114,15 @@
       </if>
     </trim>
   </insert>
+
+  <select id="queryAllUser" resultType="com.report.mange.system.vo.ReportUserVO">
+    SELECT
+    user_id,
+    u_name
+    FROM
+    report_user
+    <where>
+      AND is_deleted = 0
+    </where>
+  </select>
 </mapper>

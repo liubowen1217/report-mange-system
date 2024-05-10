@@ -2,7 +2,6 @@ package com.report.mange.system.controller;
 
 import com.report.mange.system.dto.ReportCostBreakdownRuleDTO;
 import com.report.mange.system.dto.ReportCostBreakdownRuleSaveDTO;
-import com.report.mange.system.dto.ReportCostBreakdownRuleVO;
 import com.report.mange.system.model.ReportCostBreakdownRule;
 import com.report.mange.system.service.ReportCostBreakdownRuleService;
 import com.report.mange.system.utils.ApiResult;
@@ -34,6 +33,7 @@ public class ReportCostBreakdownRuleController {
         try {
             reportCostBreakdownRuleService.saveReportCostBreakdownRuleAdd(reportCostBreakdownRule);
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error(e.getMessage());
             return ApiResult.error(500, e.getMessage());
         }

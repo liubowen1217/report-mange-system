@@ -9,6 +9,11 @@ mybatis:
     use-column-label: true
     map-underscore-to-camel-case: true
 
+
+logging:
+  level:
+    root: INFO
+
 spring:
   main:
     allow-bean-definition-overriding: true

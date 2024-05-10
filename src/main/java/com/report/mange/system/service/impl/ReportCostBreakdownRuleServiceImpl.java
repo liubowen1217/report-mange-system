@@ -5,14 +5,19 @@ import com.report.mange.system.model.*;
 import com.report.mange.system.mybatis.*;
 import com.report.mange.system.service.ReportCostBreakdownRuleService;
 import com.report.mange.system.utils.SnowflakeManager;
+import com.report.mange.system.vo.ReportCostBreakdownRuleVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author 刘博文
@@ -39,6 +44,9 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
 
     @Resource
     private ReportCostBreakdownRuleUserRelMapper reportCostBreakdownRuleUserRelMapper;
+
+    @Resource
+    private ReportCostBreakdownRuleDeptRelMapper reportCostBreakdownRuleDeptRelMapper;
 
 
     /**
@@ -85,6 +93,10 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             breakdownRuleDTO.setSystemSubject(costBreakdownRule.getSystemSubject());
             breakdownRuleDTO.setAmount(costBreakdownRule.getAmount());
 
+
+            Set<String> pUserNameSet = new HashSet<>();
+            Set<String> pDeptNameSet = new HashSet<>();
+
             List<ReportCostBreakdownRuleDetailDTO> detailList = new ArrayList<>();
             //查询当前费用规则的费用规则明细信息
             ReportCostBreakdownRuleDetail ruleDetail = new ReportCostBreakdownRuleDetail();
@@ -97,8 +109,21 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
                 List<String> userName = reportCostBreakdownRuleUserRelMapper.queryReportCostBreakdownRuleUser(breakdownRuleDetail.getFeeRuleDetailId());
                 String userNameCount = String.join(" ", userName);
                 detailDTO.setUserName(userNameCount);
+                List<String> deptName = reportCostBreakdownRuleDeptRelMapper.queryReportCostBreakdownRuleDept(breakdownRuleDetail.getFeeRuleDetailId());
+                String deptNameCount = String.join(" ", deptName);
+                detailDTO.setDeptName(deptNameCount);
                 detailList.add(detailDTO);
+
+                Set<String> userSet = new HashSet<>(userName);
+                Set<String> deptSet = new HashSet<>(deptName);
+                pUserNameSet.addAll(userSet);
+                pDeptNameSet.addAll(deptSet);
             }
+            String pUserName =  pUserNameSet.stream().collect(Collectors.joining(" "));
+            String pDeptName =  pDeptNameSet.stream().collect(Collectors.joining(" "));
+            breakdownRuleDTO.setpDeptName(pDeptName);
+            breakdownRuleDTO.setpUserName(pUserName);
+            breakdownRuleDTO.setDetailList(detailList);
             resultList.add(breakdownRuleDTO);
 
         }
@@ -112,6 +137,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
      * @return
      */
     @Override
+    @Transactional
     public Integer saveReportCostBreakdownRuleAdd(ReportCostBreakdownRuleSaveDTO reportCostBreakdownRule) {
         Long comId = reportCostBreakdownRule.getConId();
 
@@ -134,7 +160,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             for (ReportCostBreakdownRule costBreakdownRule : breakdownRule) {
                 ReportCostBreakdownRuleRecord ruleRecord = new ReportCostBreakdownRuleRecord();
                 BeanUtils.copyProperties(costBreakdownRule, ruleRecord);
-                reportCostBreakdownRuleRecordMapper.insert(ruleRecord);
+                reportCostBreakdownRuleRecordMapper.saveReportCostBreakdownRuleRecordAdd(ruleRecord);
             }
 
             //删除费用规则
@@ -147,7 +173,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             for (ReportCostBreakdownRuleDetail breakdownRuleDetail : breakdownRuleDetails) {
                 ReportCostBreakdownRuleDetailRecord detailRecord = new ReportCostBreakdownRuleDetailRecord();
                 BeanUtils.copyProperties(breakdownRuleDetail, detailRecord);
-                reportCostBreakdownRuleDetailRecordMapper.insert(detailRecord);
+                reportCostBreakdownRuleDetailRecordMapper.saveReportCostBreakdownRuleDetailRecordAdd(detailRecord);
             }
 
             //删除当前合同费用规则明细
@@ -191,11 +217,17 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
                     reportCostBreakdownRuleUserRel.setUserId(Long.parseLong(userId));
                     reportCostBreakdownRuleUserRelMapper.saveReportCostBreakdownRuleUserRelAdd(reportCostBreakdownRuleUserRel);
                 }
-                reportCostBreakdownRuleDetail.setId(snowflakeManager.nextValue());
-                reportCostBreakdownRuleDetailMapper.insert(reportCostBreakdownRuleDetail);
+
+                List<String> deptList = breakdownRuleDetail.getDeptList();
+                for (String deptid : deptList) {
+                    ReportCostBreakdownRuleDeptRel reportCostBreakdownRuleDeptRel = new ReportCostBreakdownRuleDeptRel();
+                    reportCostBreakdownRuleDeptRel.setFeeRuleDetailId(reeRuleDetailId);
+                    reportCostBreakdownRuleDeptRel.setDeptId(Long.parseLong(deptid));
+                    reportCostBreakdownRuleDeptRelMapper.saveReportCostBreakdownRuleDeptRelAdd(reportCostBreakdownRuleDeptRel);
+                }
+                reportCostBreakdownRuleDetailMapper.saveReportCostBreakdownRuleDetailAdd(reportCostBreakdownRuleDetail);
             }
-            rule1.setId(snowflakeManager.nextValue());
-            reportCostBreakdownRuleMapper.insert(rule1);
+            reportCostBreakdownRuleMapper.saveReportCostBreakdownRuleAdd(rule1);
         }
         return 1;
     }
