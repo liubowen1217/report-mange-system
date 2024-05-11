@@ -99,6 +99,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             breakdownRuleDTO.setStandardProportion(costBreakdownRule.getStandardProportion());
             breakdownRuleDTO.setSystemSubject(costBreakdownRule.getSystemSubject());
             breakdownRuleDTO.setAmount(costBreakdownRule.getAmount());
+            breakdownRuleDTO.setRemark(costBreakdownRule.getRemark());
 
             Set<String> pUserNameSet = new HashSet<>();
             Set<String> pDeptNameSet = new HashSet<>();
@@ -205,6 +206,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             rule1.setStandardProportion(reportCostBreakdownRuleVO.getStandardProportion());
             rule1.setBudgetProportion(reportCostBreakdownRuleVO.getBudgetProportion());
             rule1.setAmount(reportCostBreakdownRuleVO.getAmount());
+            rule1.setRemark(reportCostBreakdownRuleVO.getRemark());
 
 
             //处理规则明细
@@ -220,6 +222,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
                 reportCostBreakdownRuleDetail.setSubBudgetProportion(breakdownRuleDetail.getSubBudgetProportion());
                 reportCostBreakdownRuleDetail.setSubAmount(breakdownRuleDetail.getSubAmount());
                 reportCostBreakdownRuleDetail.setSubRemark(breakdownRuleDetail.getSubRemark());
+                reportCostBreakdownRuleDetail.setSubFeeRuleCode(breakdownRuleDetail.getSubFeeRuleCode());
 
                 List<String> userList = breakdownRuleDetail.getUserList();
                 if (userList != null) {
