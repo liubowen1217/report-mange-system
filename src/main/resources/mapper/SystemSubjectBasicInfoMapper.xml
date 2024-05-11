@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.report.mange.system.mybatis.SystemSubjectBasicInfoMapper">
+  <resultMap id="BaseResultMap" type="com.report.mange.system.model.SystemSubjectBasicInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_system_subject_code" jdbcType="VARCHAR" property="parentSystemSubjectCode" />
+    <result column="system_subject_code" jdbcType="VARCHAR" property="systemSubjectCode" />
+    <result column="system_subject" jdbcType="VARCHAR" property="systemSubject" />
+    <result column="is_level" jdbcType="TINYINT" property="isLevel" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <select id="queryFirstSystemSubject" resultType="com.report.mange.system.vo.BreakdownRuleVO">
+    SELECT
+    system_subject_code AS fee_rule_code,
+    system_subject,
+    is_level
+    FROM
+    system_subject_basic_info
+    <where>
+      AND parent_system_subject_code is NULL
+    </where>
+  </select>
+
+  <select id="querySecondSystemSubject" resultType="com.report.mange.system.vo.BreakdownRuleDetailVO" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    system_subject_code AS sub_fee_rule_code,
+    system_subject AS sub_system_subject,
+    is_level
+    FROM
+    system_subject_basic_info
+    <where>
+      parent_system_subject_code = #{feeRuleCode}
+    </where>
+  </select>
+</mapper>

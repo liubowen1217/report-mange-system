@@ -52,6 +52,10 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
     @Resource
     private ReportCostBreakdownRuleDeptRelMapper reportCostBreakdownRuleDeptRelMapper;
 
+    @Resource
+    private SystemSubjectBasicInfoMapper systemSubjectBasicInfoMapper;
+
+
 
     /**
      * 查询费用规则下拉
@@ -81,7 +85,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
         //查询当前合同是否已有费用规则
         ReportCostBreakdownRule rule1 = new ReportCostBreakdownRule();
         rule1.setConId(comId);
-        List<ReportCostBreakdownRule> breakdownRule = reportCostBreakdownRuleMapper.queryReportCostBreakdownRule(rule1);
+        List<ReportCostBreakdownRuleDTO> breakdownRule = reportCostBreakdownRuleMapper.queryReportCostBreakdownRule(rule1);
         //如果当前合同没有费用规则明细则返回默认值
         if (breakdownRule.size() == 0) {
             ReportCostBreakdownRule rule2 = new ReportCostBreakdownRule();
@@ -90,16 +94,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
         }
 
         //如果有费用明细则查询所有的费用明细规则信息
-        for (ReportCostBreakdownRule costBreakdownRule : breakdownRule) {
-            ReportCostBreakdownRuleDTO breakdownRuleDTO = new ReportCostBreakdownRuleDTO();
-            breakdownRuleDTO.setFeeRuleId(costBreakdownRule.getFeeRuleId());
-            breakdownRuleDTO.setConId(costBreakdownRule.getConId());
-            breakdownRuleDTO.setFeeRuleCode(costBreakdownRule.getFeeRuleCode());
-            breakdownRuleDTO.setBudgetProportion(costBreakdownRule.getBudgetProportion());
-            breakdownRuleDTO.setStandardProportion(costBreakdownRule.getStandardProportion());
-            breakdownRuleDTO.setSystemSubject(costBreakdownRule.getSystemSubject());
-            breakdownRuleDTO.setAmount(costBreakdownRule.getAmount());
-            breakdownRuleDTO.setRemark(costBreakdownRule.getRemark());
+        for (ReportCostBreakdownRuleDTO costBreakdownRule : breakdownRule) {
 
             Set<String> pUserNameSet = new HashSet<>();
             Set<String> pDeptNameSet = new HashSet<>();
@@ -122,6 +117,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
                 detailList.add(detailDTO);
                 detailDTO.setDeptList(new ArrayList<>());
                 detailDTO.setUserList(new ArrayList<>());
+                detailDTO.setIsLevel("0");
 
                 Set<String> userSet = new HashSet<>(userName);
                 Set<String> deptSet = new HashSet<>(deptName);
@@ -130,10 +126,10 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             }
             String pUserName = pUserNameSet.stream().collect(Collectors.joining(" "));
             String pDeptName = pDeptNameSet.stream().collect(Collectors.joining(" "));
-            breakdownRuleDTO.setpDeptName(pDeptName);
-            breakdownRuleDTO.setpUserName(pUserName);
-            breakdownRuleDTO.setDetailList(detailList);
-            resultList.add(breakdownRuleDTO);
+            costBreakdownRule.setpDeptName(pDeptName);
+            costBreakdownRule.setpUserName(pUserName);
+            costBreakdownRule.setDetailList(detailList);
+            resultList.add(costBreakdownRule);
 
         }
         return resultList;
@@ -162,7 +158,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
         //查询当前合同是否已有费用规则
         ReportCostBreakdownRule rule = new ReportCostBreakdownRule();
         rule.setConId(comId);
-        List<ReportCostBreakdownRule> breakdownRule = reportCostBreakdownRuleMapper.queryReportCostBreakdownRule(rule);
+        List<ReportCostBreakdownRuleDTO> breakdownRule = reportCostBreakdownRuleMapper.queryReportCostBreakdownRule(rule);
 
         //如果已经有了明细规则 则将明细规则放到记录里面并记录版本号
         LocalDateTime now = LocalDateTime.now();
@@ -170,7 +166,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
         String formattedDateTime = now.format(formatter);
         if (breakdownRule.size() > 0) {
             //插入到记录表中
-            for (ReportCostBreakdownRule costBreakdownRule : breakdownRule) {
+            for (ReportCostBreakdownRuleDTO costBreakdownRule : breakdownRule) {
                 ReportCostBreakdownRuleRecord ruleRecord = new ReportCostBreakdownRuleRecord();
                 BeanUtils.copyProperties(costBreakdownRule, ruleRecord);
                 ruleRecord.setRecordCode(formattedDateTime);
@@ -352,7 +348,7 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
      */
     @Override
     public List<BreakdownRuleVO> queryBreakdownRuleDrop() {
-        return reportCostBreakdownRuleMapper.queryBreakdownRuleDrop();
+        return systemSubjectBasicInfoMapper.queryFirstSystemSubject();
     }
 
 
@@ -363,6 +359,6 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
      */
     @Override
     public List<BreakdownRuleDetailVO> queryBreakdownRuleDetailDrop(ReportCostBreakdownRule rule) {
-        return reportCostBreakdownRuleDetailMapper.queryBreakdownRuleDetailDrop(rule);
+        return systemSubjectBasicInfoMapper.querySecondSystemSubject(rule);
     }
 }

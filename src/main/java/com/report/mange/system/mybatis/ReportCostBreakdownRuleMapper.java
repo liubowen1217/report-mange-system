@@ -13,7 +13,7 @@ public interface ReportCostBreakdownRuleMapper extends Mapper<ReportCostBreakdow
 
     List<ReportCostBreakdownRuleDTO> queryDefaultReportCostBreakdownRule(ReportCostBreakdownRule rule);
 
-    List<ReportCostBreakdownRule> queryReportCostBreakdownRule(ReportCostBreakdownRule rule);
+    List<ReportCostBreakdownRuleDTO> queryReportCostBreakdownRule(ReportCostBreakdownRule rule);
 
     Integer saveReportCostBreakdownRuleDel(@Param("conId") Long conId);
 

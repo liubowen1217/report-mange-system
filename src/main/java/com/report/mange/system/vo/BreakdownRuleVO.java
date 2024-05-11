@@ -18,6 +18,13 @@ public class BreakdownRuleVO {
     @Column(name = "system_subject")
     private String systemSubject;
 
+    /**
+     * 是否有下级
+     */
+    @Column(name = "is_level")
+    private String isLevel;
+
+
     public String getFeeRuleCode() {
         return feeRuleCode;
     }
@@ -32,5 +39,13 @@ public class BreakdownRuleVO {
 
     public void setSystemSubject(String systemSubject) {
         this.systemSubject = systemSubject;
+    }
+
+    public String getIsLevel() {
+        return isLevel;
+    }
+
+    public void setIsLevel(String isLevel) {
+        this.isLevel = isLevel;
     }
 }

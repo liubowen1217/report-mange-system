@@ -104,7 +104,7 @@ public class ReportCostBreakdownRuleController {
     /**
      * @Description: 查询费用规则下拉
      */
-    @ApiOperation("查询费用规则下拉")
+    @ApiOperation("查询系统科目下拉")
     @PostMapping("/queryBreakdownRuleDrop")
     public ApiResult<List<BreakdownRuleVO>> queryBreakdownRuleDrop() throws Exception {
         List<BreakdownRuleVO> list = reportCostBreakdownRuleService.queryBreakdownRuleDrop();
@@ -114,7 +114,7 @@ public class ReportCostBreakdownRuleController {
     /**
      * @Description: 查询费用明细下拉
      */
-    @ApiOperation("查询费用明细下拉")
+    @ApiOperation("查询二级系统科目下拉")
     @PostMapping("/queryBreakdownRuleDetailDrop")
     public ApiResult<List<BreakdownRuleDetailVO>> queryBreakdownRuleDetailDrop(@RequestBody ReportCostBreakdownRule rule) throws Exception {
         List<BreakdownRuleDetailVO> list = reportCostBreakdownRuleService.queryBreakdownRuleDetailDrop(rule);

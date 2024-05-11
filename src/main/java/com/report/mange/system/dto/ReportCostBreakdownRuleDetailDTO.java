@@ -73,6 +73,14 @@ public class ReportCostBreakdownRuleDetailDTO {
      */
     List<String> deptList= new ArrayList<>();
 
+    /**
+     * 是否有下级
+     */
+    @Column(name = "is_level")
+    private String isLevel;
+
+
+
     public Long getFeeRuleDetailId() {
         return feeRuleDetailId;
     }
@@ -167,5 +175,13 @@ public class ReportCostBreakdownRuleDetailDTO {
 
     public void setSubFeeRuleCode(Long subFeeRuleCode) {
         this.subFeeRuleCode = subFeeRuleCode;
+    }
+
+    public String getIsLevel() {
+        return isLevel;
+    }
+
+    public void setIsLevel(String isLevel) {
+        this.isLevel = isLevel;
     }
 }

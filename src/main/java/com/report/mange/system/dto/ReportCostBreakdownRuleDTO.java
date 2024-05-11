@@ -2,6 +2,7 @@ package com.report.mange.system.dto;
 
 import com.report.mange.system.model.ReportCostBreakdownRuleDetail;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
@@ -72,6 +73,13 @@ public class ReportCostBreakdownRuleDTO {
      * 费用规则明细
      */
     List<ReportCostBreakdownRuleDetailDTO> detailList;
+
+    /**
+     * 是否有下级
+     */
+    @Column(name = "is_level")
+    private String isLevel;
+
 
 
     /**
@@ -276,5 +284,13 @@ public class ReportCostBreakdownRuleDTO {
 
     public void setpUserName(String pUserName) {
         this.pUserName = pUserName;
+    }
+
+    public String getIsLevel() {
+        return isLevel;
+    }
+
+    public void setIsLevel(String isLevel) {
+        this.isLevel = isLevel;
     }
 }
