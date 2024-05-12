@@ -27,9 +27,9 @@ public class ReportDeptController {
 
 
     /**
-     * @Description: 查询全部合同
+     * @Description: 查询部门
      */
-    @ApiOperation("查询单位")
+    @ApiOperation("查询部门")
     @PostMapping("/queryAllDept")
     public ApiResult<List<ReportDeptVO>> queryAllDept() throws Exception {
         List<ReportDeptVO> list = reportDeptService.queryAllDept();

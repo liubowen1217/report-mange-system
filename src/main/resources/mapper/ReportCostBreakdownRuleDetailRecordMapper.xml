@@ -114,7 +114,7 @@
     org_id,
     sub_remark
     FROM
-    report_cost_breakdown_rule_detail_record
+    report_cost_breakdown_rule_detail
     <where>
       AND is_deleted = 0
       <if test="conId != null">
@@ -122,6 +122,38 @@
       </if>
       <if test="feeRuleId != null">
         AND fee_rule_id = #{feeRuleId}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryReportCostBreakdownRuleDetailRecordNew" resultType="com.report.mange.system.model.ReportCostBreakdownRuleDetailRecord" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    id,
+    fee_rule_id AS fee_rule_detail_id,
+    p_fee_rule_id AS fee_rule_id,
+    con_id,
+    system_subject AS sub_system_subject,
+    fee_rule_code AS sub_fee_rule_code,
+    standard_proportion AS sub_standard_proportion,
+    budget_proportion AS sub_budget_proportion,
+    amount AS sub_amount,
+    org_id,
+    remark AS sub_remark
+    FROM
+    report_cost_breakdown_rule
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="feeRuleId != null">
+        AND fee_rule_id = #{feeRuleId}
+      </if>
+      <if test="feeRuleId != null">
+        AND fee_rule_id = #{feeRuleId}
+      </if>
+      <if test="pFeeRuleId != null">
+        AND p_fee_rule_id = #{pFeeRuleId}
       </if>
     </where>
   </select>

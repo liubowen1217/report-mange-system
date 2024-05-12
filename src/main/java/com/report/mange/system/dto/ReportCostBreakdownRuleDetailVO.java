@@ -19,7 +19,7 @@ public class ReportCostBreakdownRuleDetailVO {
      * 费用规则明细编码
      */
     @Column(name = "sub_fee_rule_code")
-    private Long subFeeRuleCode;
+    private String subFeeRuleCode;
 
     /**
      * 系统科目
@@ -53,6 +53,12 @@ public class ReportCostBreakdownRuleDetailVO {
      * 部门列表
      */
     List<String> deptList;
+
+    /**
+     * 是否有下级
+     */
+    @Column(name = "is_level")
+    private String isLevel;
 
     public Long getFeeRuleDetailId() {
         return feeRuleDetailId;
@@ -126,11 +132,19 @@ public class ReportCostBreakdownRuleDetailVO {
         this.deptList = deptList;
     }
 
-    public Long getSubFeeRuleCode() {
+    public String getSubFeeRuleCode() {
         return subFeeRuleCode;
     }
 
-    public void setSubFeeRuleCode(Long subFeeRuleCode) {
+    public void setSubFeeRuleCode(String subFeeRuleCode) {
         this.subFeeRuleCode = subFeeRuleCode;
+    }
+
+    public String getIsLevel() {
+        return isLevel;
+    }
+
+    public void setIsLevel(String isLevel) {
+        this.isLevel = isLevel;
     }
 }

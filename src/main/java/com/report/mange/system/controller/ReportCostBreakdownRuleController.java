@@ -34,7 +34,7 @@ public class ReportCostBreakdownRuleController {
 
     @ApiOperation("新增费用明细信息")
     @PostMapping("/saveReportCostBreakdownRuleAdd")
-    public ApiResult<Integer> insert(@RequestBody ReportCostBreakdownRuleSaveDTO reportCostBreakdownRule) throws Exception {
+    public ApiResult<Integer> saveReportCostBreakdownRuleAdd(@RequestBody ReportCostBreakdownRuleSaveDTO reportCostBreakdownRule) throws Exception {
         try {
             reportCostBreakdownRuleService.saveReportCostBreakdownRuleAdd(reportCostBreakdownRule);
         } catch (Exception e) {

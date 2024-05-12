@@ -21,6 +21,7 @@
 
   <select id="queryReportCostBreakdownRuleDetail" resultType="com.report.mange.system.model.ReportCostBreakdownRuleDetail" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleDetail">
     SELECT
+    id,
     fee_rule_detail_id,
     fee_rule_id,
     con_id,
@@ -35,6 +36,7 @@
     report_cost_breakdown_rule_detail
     <where>
       AND is_deleted = 0
+      AND is_enable = 1
       <if test="conId != null">
         AND con_id = #{conId}
       </if>
@@ -82,6 +84,9 @@
       <if test=" subRemark!= null and subRemark != ''">
         sub_remark,
       </if>
+      <if test=" recordCode!= null and recordCode != ''">
+        record_code,
+      </if>
       <if test="creator != null and creator != ''">
         creator,
       </if>
@@ -117,6 +122,9 @@
       <if test="subRemark != null and subRemark != ''">
         #{subRemark},
       </if>
+      <if test="recordCode != null and recordCode != ''">
+        #{recordCode},
+      </if>
       <if test="creator != null and creator != ''">
         #{creator},
       </if>
@@ -140,5 +148,18 @@
         AND t2.fee_rule_code = #{feeRuleCode}
     </where>
   </select>
+
+  <update id="saveReportCostBreakdownRuleDetailModify" parameterType="com.report.mange.system.model.ReportCon">
+    UPDATE report_cost_breakdown_rule_detail
+    <set>
+      is_enable = 0
+    </set>
+    <where>
+      <if test="conId != null ">
+        AND con_id = #{conId}
+      </if>
+      AND is_enable = 1
+    </where>
+  </update>
 
 </mapper>

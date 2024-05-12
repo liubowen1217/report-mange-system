@@ -35,7 +35,7 @@
     FROM
     report_account t1
     INNER JOIN report_user t2 ON t1.user_id = t2.user_id AND t2.is_deleted = 0
-    INNER JOIN report_dept t3 ON t2.dept_id = t3.dept_id AND t3.is_deleted = 0
+    LEFT JOIN report_dept t3 ON t2.dept_id = t3.dept_id AND t3.is_deleted = 0
     <where>
       AND t1.is_deleted = 0
       <if test="userAcctId != null">

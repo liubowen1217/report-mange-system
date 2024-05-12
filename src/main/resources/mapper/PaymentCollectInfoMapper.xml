@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.report.mange.system.mybatis.PaymentCollectInfoMapper">
+  <resultMap id="BaseResultMap" type="com.report.mange.system.model.PaymentCollectInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="payment_id" jdbcType="BIGINT" property="paymentId" />
+    <result column="con_id" jdbcType="BIGINT" property="conId" />
+    <result column="period_number" jdbcType="VARCHAR" property="periodNumber" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="collect_dept" jdbcType="VARCHAR" property="collectDept" />
+    <result column="receipt_date" jdbcType="DATE" property="receiptDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <insert id="savePaymentCollectAdd" parameterType="com.report.mange.system.model.PaymentCollectInfo">
+    insert into payment_collect_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="paymentId != null">
+        payment_id,
+      </if>
+      <if test="conId != null">
+        con_id,
+      </if>
+      <if test="periodNumber != null and periodNumber != ''">
+        period_number,
+      </if>
+      <if test="amount != null and amount != ''">
+        amount,
+      </if>
+      <if test="collectDept != null and collectDept != ''">
+        collect_dept,
+      </if>
+      <if test="receiptDate != null">
+        receipt_date,
+      </if>
+      <if test=" remark!= null and remark != ''">
+        remark,
+      </if>
+      <if test="creator != null and creator != ''">
+        creator,
+      </if>
+      <if test="modifier != null and modifier != ''">
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paymentId != null">
+        #{paymentId},
+      </if>
+      <if test="conId != null">
+        #{conId},
+      </if>
+      <if test="periodNumber != null and periodNumber != ''">
+        #{periodNumber},
+      </if>
+      <if test="amount != null and amount != ''">
+        #{amount},
+      </if>
+      <if test="collectDept != null and collectDept != ''">
+        #{collectDept},
+      </if>
+      <if test="receiptDate != null">
+        #{receiptDate},
+      </if>
+      <if test="remark != null and remark != ''">
+        #{remark},
+      </if>
+      <if test="creator != null and creator != ''">
+        #{creator},
+      </if>
+      <if test="modifier != null and modifier != ''">
+        #{modifier},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="queryPaymentCollect" resultType="com.report.mange.system.dto.PaymentCollectInfoDTO">
+    SELECT
+    payment_id,
+    con_id,
+    period_number,
+    amount,
+    collect_dept,
+    receipt_date,
+    remark
+    FROM
+    payment_collect_info
+    <where>
+      AND is_deleted = 0
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="paymentId != null">
+        AND payment_id = #{paymentId}
+      </if>
+    </where>
+  </select>
+
+</mapper>

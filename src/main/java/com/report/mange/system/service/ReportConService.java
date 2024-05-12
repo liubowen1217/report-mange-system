@@ -16,11 +16,11 @@ public interface ReportConService {
 
     Integer saveReportConModify(ReportCon reportCon);
 
-
     List<ReportCon> queryReportCon(ReportConQuery query);
 
     List<ReportConVO> queryAllReportCon();
 
-
     ReportCon queryReportConById(ReportConQuery query);
+
+    Integer saveReportConDel(ReportCon reportCon);
 }

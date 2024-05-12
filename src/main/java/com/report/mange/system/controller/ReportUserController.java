@@ -1,9 +1,7 @@
 package com.report.mange.system.controller;
 
-import com.report.mange.system.model.ReportUser;
 import com.report.mange.system.service.ReportUserService;
 import com.report.mange.system.utils.ApiResult;
-import com.report.mange.system.vo.ReportConVO;
 import com.report.mange.system.vo.ReportUserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

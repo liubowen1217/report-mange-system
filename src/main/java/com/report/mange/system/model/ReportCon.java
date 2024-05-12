@@ -98,6 +98,12 @@ public class ReportCon {
     private String taxAmt;
 
     /**
+     * 回款金额
+     */
+    @Column(name = "collect_amount")
+    private String collectAmount;
+
+    /**
      * 上交利润比例
      */
     @Column(name = "submit_profit_rate")
@@ -136,7 +142,7 @@ public class ReportCon {
      * 逻辑删除 1.是，0.否
      */
     @Column(name = "is_deleted")
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     /**
      * 创建人
@@ -548,11 +554,11 @@ public class ReportCon {
         this.remark = remark;
     }
 
-    public Byte getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -570,5 +576,13 @@ public class ReportCon {
 
     public void setModifier(String modifier) {
         this.modifier = modifier;
+    }
+
+    public String getCollectAmount() {
+        return collectAmount;
+    }
+
+    public void setCollectAmount(String collectAmount) {
+        this.collectAmount = collectAmount;
     }
 }

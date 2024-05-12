@@ -1,7 +1,6 @@
 package com.report.mange.system.service;
 
 
-import com.report.mange.system.model.ReportDept;
 import com.report.mange.system.vo.ReportDeptVO;
 
 import java.util.List;

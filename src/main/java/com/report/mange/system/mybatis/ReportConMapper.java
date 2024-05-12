@@ -12,9 +12,7 @@ public interface ReportConMapper extends Mapper<ReportCon> {
 
     Integer saveReportConAdd(ReportCon reportCon);
 
-
     Integer saveReportConModify(ReportCon reportCon);
-
 
     List<ReportCon> queryReportCon(ReportConQuery query);
 

@@ -16,6 +16,7 @@
     <result column="opposite_org_name" jdbcType="VARCHAR" property="oppositeOrgName" />
     <result column="opposite_org_code" jdbcType="VARCHAR" property="oppositeOrgCode" />
     <result column="tax_amt" jdbcType="VARCHAR" property="taxAmt" />
+    <result column="collect_amount" jdbcType="VARCHAR" property="collectAmount" />
     <result column="submit_profit_rate" jdbcType="VARCHAR" property="submitProfitRate" />
     <result column="budget_subcontract_amt" jdbcType="VARCHAR" property="budgetSubcontractAmt" />
     <result column="sign_department" jdbcType="VARCHAR" property="signDepartment" />
@@ -196,6 +197,9 @@
       <if test="taxAmt != null and taxAmt != ''">
         tax_amt = #{taxAmt},
       </if>
+      <if test="collectAmount != null and collectAmount != ''">
+        collect_amount = #{collectAmount},
+      </if>
       <if test="submitProfitRate != null and submitProfitRate != ''">
         submit_profit_rate = #{submitProfitRate},
       </if>
@@ -213,6 +217,9 @@
       </if>
       <if test="modifier != null and modifier != ''">
         modifier = #{modifier},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted},
       </if>
     </set>
     <where>
@@ -242,6 +249,7 @@
       t1.opposite_org_name,
       t1.opposite_org_code,
       t1.tax_amt,
+      t1.collect_amount,
       t1.submit_profit_rate,
       t1.budget_subcontract_amt,
       t1.sign_department,

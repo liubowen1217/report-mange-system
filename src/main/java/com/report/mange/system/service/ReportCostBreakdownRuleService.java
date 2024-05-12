@@ -24,7 +24,6 @@ public interface ReportCostBreakdownRuleService {
 
     Integer saveReportCostBreakdownRuleAdd(ReportCostBreakdownRuleSaveDTO reportCostBreakdownRule);
 
-
     List<AdjustingRecordDTO> queryAdjustingRecords(ReportCostBreakdownRule rule);
 
     List<ReportCostBreakdownRuleDTO> queryAdjustingRecordDetail(ReportCostBreakdownRuleRecord rule);

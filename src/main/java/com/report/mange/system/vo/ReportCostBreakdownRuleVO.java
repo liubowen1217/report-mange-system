@@ -3,8 +3,10 @@ package com.report.mange.system.vo;
 import com.report.mange.system.dto.ReportCostBreakdownRuleDetailVO;
 import com.report.mange.system.model.ReportCostBreakdownRuleDetail;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "report_cost_breakdown_rule")
@@ -61,6 +63,23 @@ public class ReportCostBreakdownRuleVO {
      * 费用规则明细
      */
     List<ReportCostBreakdownRuleDetailVO> detailList;
+
+
+    /**
+     * 是否有下级
+     */
+    @Column(name = "is_level")
+    private String isLevel;
+
+
+    /**
+     * 人员列表
+     */
+    List<String> pUserList = new ArrayList<>();
+    /**
+     * 部门列表
+     */
+    List<String> pDeptList= new ArrayList<>();
 
 
     /**
@@ -249,5 +268,29 @@ public class ReportCostBreakdownRuleVO {
 
     public void setDetailList(List<ReportCostBreakdownRuleDetailVO> detailList) {
         this.detailList = detailList;
+    }
+
+    public String getIsLevel() {
+        return isLevel;
+    }
+
+    public void setIsLevel(String isLevel) {
+        this.isLevel = isLevel;
+    }
+
+    public List<String> getpUserList() {
+        return pUserList;
+    }
+
+    public void setpUserList(List<String> pUserList) {
+        this.pUserList = pUserList;
+    }
+
+    public List<String> getpDeptList() {
+        return pDeptList;
+    }
+
+    public void setpDeptList(List<String> pDeptList) {
+        this.pDeptList = pDeptList;
     }
 }

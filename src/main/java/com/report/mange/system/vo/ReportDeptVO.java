@@ -1,5 +1,8 @@
 package com.report.mange.system.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,6 +14,7 @@ public class ReportDeptVO {
      * 单位ID
      */
     @Column(name = "dept_id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long deptId;
 
     /**

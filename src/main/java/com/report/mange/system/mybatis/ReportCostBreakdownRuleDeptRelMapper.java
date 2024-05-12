@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface ReportCostBreakdownRuleDeptRelMapper extends Mapper<ReportCostBreakdownRuleDeptRel> {
 
-    List<String> queryReportCostBreakdownRuleDept(@Param("feeRuleDetailId") Long feeRuleDetailId);
+    List<String> queryReportCostBreakdownRuleDept(@Param("ruleId") Long ruleId);
 
     Integer saveReportCostBreakdownRuleDeptRelAdd(ReportCostBreakdownRuleDeptRel deptRel);
+
+    List<String> queryReportCostBreakdownRuleDeptId(@Param("ruleId") Long ruleId);
+
 }

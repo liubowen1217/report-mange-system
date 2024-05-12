@@ -1,10 +1,12 @@
 package com.report.mange.system.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "report_cost_breakdown_rule_user_rel")
-public class ReportCostBreakdownRuleUserRel {
+@Table(name = "payment_collect_info")
+public class PaymentCollectInfo {
     /**
      * 主键
      */
@@ -12,16 +14,39 @@ public class ReportCostBreakdownRuleUserRel {
     private Long id;
 
     /**
-     * 费用规则明细id
+     * 回款信息id
      */
-    @Column(name = "rule_id")
-    private Long ruleId;
+    @Column(name = "payment_id")
+    private Long paymentId;
 
     /**
-     * 用户ID
+     * 合同ID
      */
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "con_id")
+    private Long conId;
+
+    /**
+     * 期数
+     */
+    @Column(name = "period_number")
+    private String periodNumber;
+
+    /**
+     * 金额
+     */
+    private String amount;
+
+    /**
+     * 回款单位
+     */
+    @Column(name = "collect_dept")
+    private String collectDept;
+
+    /**
+     * 到账日期
+     */
+    @Column(name = "receipt_date")
+    private Date receiptDate;
 
     /**
      * 备注
@@ -32,7 +57,7 @@ public class ReportCostBreakdownRuleUserRel {
      * 逻辑删除 1.是，0.否
      */
     @Column(name = "is_deleted")
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     /**
      * 创建人
@@ -75,34 +100,111 @@ public class ReportCostBreakdownRuleUserRel {
     }
 
     /**
-     * 获取费用规则id
+     * 获取回款信息id
      *
-     * @return fee_rule_id - 费用规则明细id
+     * @return payment_id - 回款信息id
      */
-    public Long getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(Long ruleId) {
-        this.ruleId = ruleId;
+    public Long getPaymentId() {
+        return paymentId;
     }
 
     /**
-     * 获取用户ID
+     * 设置回款信息id
      *
-     * @return user_id - 用户ID
+     * @param paymentId 回款信息id
      */
-    public Long getUserId() {
-        return userId;
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
     }
 
     /**
-     * 设置用户ID
+     * 获取合同ID
      *
-     * @param userId 用户ID
+     * @return con_id - 合同ID
      */
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public Long getConId() {
+        return conId;
+    }
+
+    /**
+     * 设置合同ID
+     *
+     * @param conId 合同ID
+     */
+    public void setConId(Long conId) {
+        this.conId = conId;
+    }
+
+    /**
+     * 获取期数
+     *
+     * @return period_number - 期数
+     */
+    public String getPeriodNumber() {
+        return periodNumber;
+    }
+
+    /**
+     * 设置期数
+     *
+     * @param periodNumber 期数
+     */
+    public void setPeriodNumber(String periodNumber) {
+        this.periodNumber = periodNumber == null ? null : periodNumber.trim();
+    }
+
+    /**
+     * 获取金额
+     *
+     * @return amount - 金额
+     */
+    public String getAmount() {
+        return amount;
+    }
+
+    /**
+     * 设置金额
+     *
+     * @param amount 金额
+     */
+    public void setAmount(String amount) {
+        this.amount = amount == null ? null : amount.trim();
+    }
+
+    /**
+     * 获取回款单位
+     *
+     * @return collect_dept - 回款单位
+     */
+    public String getCollectDept() {
+        return collectDept;
+    }
+
+    /**
+     * 设置回款单位
+     *
+     * @param collectDept 回款单位
+     */
+    public void setCollectDept(String collectDept) {
+        this.collectDept = collectDept == null ? null : collectDept.trim();
+    }
+
+    /**
+     * 获取到账日期
+     *
+     * @return receipt_date - 到账日期
+     */
+    public Date getReceiptDate() {
+        return receiptDate;
+    }
+
+    /**
+     * 设置到账日期
+     *
+     * @param receiptDate 到账日期
+     */
+    public void setReceiptDate(Date receiptDate) {
+        this.receiptDate = receiptDate;
     }
 
     /**
@@ -128,7 +230,7 @@ public class ReportCostBreakdownRuleUserRel {
      *
      * @return is_deleted - 逻辑删除 1.是，0.否
      */
-    public Byte getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
@@ -137,7 +239,7 @@ public class ReportCostBreakdownRuleUserRel {
      *
      * @param isDeleted 逻辑删除 1.是，0.否
      */
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 

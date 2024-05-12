@@ -1,10 +1,12 @@
 package com.report.mange.system.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "report_cost_breakdown_rule_user_rel")
-public class ReportCostBreakdownRuleUserRel {
+@Table(name = "payment_collect_info_dept_rel")
+public class PaymentCollectInfoDeptRel {
     /**
      * 主键
      */
@@ -12,16 +14,16 @@ public class ReportCostBreakdownRuleUserRel {
     private Long id;
 
     /**
-     * 费用规则明细id
+     * 回款信息ID
      */
-    @Column(name = "rule_id")
-    private Long ruleId;
+    @Column(name = "payment_id")
+    private Long paymentId;
 
     /**
-     * 用户ID
+     * 单位ID
      */
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "dept_id")
+    private Long deptId;
 
     /**
      * 备注
@@ -75,34 +77,39 @@ public class ReportCostBreakdownRuleUserRel {
     }
 
     /**
-     * 获取费用规则id
+     * 获取回款信息ID
      *
-     * @return fee_rule_id - 费用规则明细id
+     * @return payment_id - 回款信息ID
      */
-    public Long getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(Long ruleId) {
-        this.ruleId = ruleId;
+    public Long getPaymentId() {
+        return paymentId;
     }
 
     /**
-     * 获取用户ID
+     * 设置回款信息ID
      *
-     * @return user_id - 用户ID
+     * @param paymentId 回款信息ID
      */
-    public Long getUserId() {
-        return userId;
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
     }
 
     /**
-     * 设置用户ID
+     * 获取单位ID
      *
-     * @param userId 用户ID
+     * @return dept_id - 单位ID
      */
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public Long getDeptId() {
+        return deptId;
+    }
+
+    /**
+     * 设置单位ID
+     *
+     * @param deptId 单位ID
+     */
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
     }
 
     /**

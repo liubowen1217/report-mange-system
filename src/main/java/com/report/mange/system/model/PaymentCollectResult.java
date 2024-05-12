@@ -1,10 +1,12 @@
 package com.report.mange.system.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "report_cost_breakdown_rule_user_rel")
-public class ReportCostBreakdownRuleUserRel {
+@Table(name = "payment_collect_result")
+public class PaymentCollectResult {
     /**
      * 主键
      */
@@ -12,16 +14,34 @@ public class ReportCostBreakdownRuleUserRel {
     private Long id;
 
     /**
-     * 费用规则明细id
+     * 回款结果id
      */
-    @Column(name = "rule_id")
-    private Long ruleId;
+    @Column(name = "payment_result_id")
+    private Long paymentResultId;
 
     /**
-     * 用户ID
+     * 回款信息id
      */
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "payment_id")
+    private Long paymentId;
+
+    /**
+     * 合同ID
+     */
+    @Column(name = "con_id")
+    private Long conId;
+
+    /**
+     * 费用明细id
+     */
+    @Column(name = "fee_rule_id")
+    private Long feeRuleId;
+
+    /**
+     * 分配金额
+     */
+    @Column(name = "allocat_amount")
+    private String allocatAmount;
 
     /**
      * 备注
@@ -75,34 +95,93 @@ public class ReportCostBreakdownRuleUserRel {
     }
 
     /**
-     * 获取费用规则id
+     * 获取回款结果id
      *
-     * @return fee_rule_id - 费用规则明细id
+     * @return payment_result_id - 回款结果id
      */
-    public Long getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(Long ruleId) {
-        this.ruleId = ruleId;
+    public Long getPaymentResultId() {
+        return paymentResultId;
     }
 
     /**
-     * 获取用户ID
+     * 设置回款结果id
      *
-     * @return user_id - 用户ID
+     * @param paymentResultId 回款结果id
      */
-    public Long getUserId() {
-        return userId;
+    public void setPaymentResultId(Long paymentResultId) {
+        this.paymentResultId = paymentResultId;
     }
 
     /**
-     * 设置用户ID
+     * 获取回款信息id
      *
-     * @param userId 用户ID
+     * @return payment_id - 回款信息id
      */
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public Long getPaymentId() {
+        return paymentId;
+    }
+
+    /**
+     * 设置回款信息id
+     *
+     * @param paymentId 回款信息id
+     */
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    /**
+     * 获取合同ID
+     *
+     * @return con_id - 合同ID
+     */
+    public Long getConId() {
+        return conId;
+    }
+
+    /**
+     * 设置合同ID
+     *
+     * @param conId 合同ID
+     */
+    public void setConId(Long conId) {
+        this.conId = conId;
+    }
+
+    /**
+     * 获取费用明细id
+     *
+     * @return fee_rule_id - 费用明细id
+     */
+    public Long getFeeRuleId() {
+        return feeRuleId;
+    }
+
+    /**
+     * 设置费用明细id
+     *
+     * @param feeRuleId 费用明细id
+     */
+    public void setFeeRuleId(Long feeRuleId) {
+        this.feeRuleId = feeRuleId;
+    }
+
+    /**
+     * 获取分配金额
+     *
+     * @return allocat_amount - 分配金额
+     */
+    public String getAllocatAmount() {
+        return allocatAmount;
+    }
+
+    /**
+     * 设置分配金额
+     *
+     * @param allocatAmount 分配金额
+     */
+    public void setAllocatAmount(String allocatAmount) {
+        this.allocatAmount = allocatAmount == null ? null : allocatAmount.trim();
     }
 
     /**

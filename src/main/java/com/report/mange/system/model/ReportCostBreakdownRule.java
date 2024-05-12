@@ -18,6 +18,11 @@ public class ReportCostBreakdownRule {
     private Long feeRuleId;
 
     /**
+     * 上级费用规则id
+     */
+    private Long pFeeRuleId;
+
+    /**
      * 合同ID
      */
     @Column(name = "con_id")
@@ -64,10 +69,22 @@ public class ReportCostBreakdownRule {
     private String remark;
 
     /**
+     * 记录编码
+     */
+    @Column(name = "record_code")
+    private String recordCode;
+
+    /**
+     * 是否启用 1.是，0.否
+     */
+    @Column(name = "is_enable")
+    private Integer isEnable;
+
+    /**
      * 逻辑删除 1.是，0.否
      */
     @Column(name = "is_deleted")
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     /**
      * 创建人
@@ -276,7 +293,7 @@ public class ReportCostBreakdownRule {
      *
      * @return is_deleted - 逻辑删除 1.是，0.否
      */
-    public Byte getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
@@ -285,7 +302,7 @@ public class ReportCostBreakdownRule {
      *
      * @param isDeleted 逻辑删除 1.是，0.否
      */
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -359,5 +376,29 @@ public class ReportCostBreakdownRule {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getRecordCode() {
+        return recordCode;
+    }
+
+    public void setRecordCode(String recordCode) {
+        this.recordCode = recordCode;
+    }
+
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    public Long getpFeeRuleId() {
+        return pFeeRuleId;
+    }
+
+    public void setpFeeRuleId(Long pFeeRuleId) {
+        this.pFeeRuleId = pFeeRuleId;
     }
 }

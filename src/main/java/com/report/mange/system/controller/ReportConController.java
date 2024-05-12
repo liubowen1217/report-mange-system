@@ -54,6 +54,19 @@ public class ReportConController {
     }
 
 
+    @ApiOperation("删除合同信息")
+    @PostMapping("/saveReportConDel")
+    public ApiResult<Integer> saveReportConDel(@RequestBody ReportCon reportCon) throws Exception {
+        try {
+            reportConService.saveReportConDel(reportCon);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ApiResult.error(500, e.getMessage());
+        }
+        return ApiResult.ok();
+    }
+
+
     /**
      * @Description: 分页查询
      * @Reutrn ApiResult<PageInfo < ReportCon>>

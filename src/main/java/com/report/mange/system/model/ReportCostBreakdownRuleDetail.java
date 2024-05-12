@@ -33,7 +33,7 @@ public class ReportCostBreakdownRuleDetail {
      * 费用规则明细编码
      */
     @Column(name = "sub_fee_rule_code")
-    private Long subFeeRuleCode;
+    private String subFeeRuleCode;
 
 
     /**
@@ -71,10 +71,22 @@ public class ReportCostBreakdownRuleDetail {
     private String subRemark;
 
     /**
+     * 记录编码
+     */
+    @Column(name = "record_code")
+    private String recordCode;
+
+    /**
+     * 是否启用 1.是，0.否
+     */
+    @Column(name = "is_enable")
+    private Integer isEnable;
+
+    /**
      * 逻辑删除 1.是，0.否
      */
     @Column(name = "is_deleted")
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     /**
      * 创建人
@@ -234,7 +246,7 @@ public class ReportCostBreakdownRuleDetail {
      *
      * @return is_deleted - 逻辑删除 1.是，0.否
      */
-    public Byte getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
@@ -243,7 +255,7 @@ public class ReportCostBreakdownRuleDetail {
      *
      * @param isDeleted 逻辑删除 1.是，0.否
      */
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -319,11 +331,27 @@ public class ReportCostBreakdownRuleDetail {
         this.updateTime = updateTime;
     }
 
-    public Long getSubFeeRuleCode() {
+    public String getSubFeeRuleCode() {
         return subFeeRuleCode;
     }
 
-    public void setSubFeeRuleCode(Long subFeeRuleCode) {
+    public void setSubFeeRuleCode(String subFeeRuleCode) {
         this.subFeeRuleCode = subFeeRuleCode;
+    }
+
+    public String getRecordCode() {
+        return recordCode;
+    }
+
+    public void setRecordCode(String recordCode) {
+        this.recordCode = recordCode;
+    }
+
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
     }
 }

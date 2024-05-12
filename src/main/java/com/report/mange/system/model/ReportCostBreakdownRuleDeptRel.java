@@ -16,8 +16,8 @@ public class ReportCostBreakdownRuleDeptRel {
     /**
      * 费用规则明细id
      */
-    @Column(name = "fee_rule_detail_id")
-    private Long feeRuleDetailId;
+    @Column(name = "rule_id")
+    private Long ruleId;
 
     /**
      * 单位ID
@@ -81,17 +81,12 @@ public class ReportCostBreakdownRuleDeptRel {
      *
      * @return fee_rule_detail_id - 费用规则明细id
      */
-    public Long getFeeRuleDetailId() {
-        return feeRuleDetailId;
+    public Long getRuleId() {
+        return ruleId;
     }
 
-    /**
-     * 设置费用规则明细id
-     *
-     * @param feeRuleDetailId 费用规则明细id
-     */
-    public void setFeeRuleDetailId(Long feeRuleDetailId) {
-        this.feeRuleDetailId = feeRuleDetailId;
+    public void setRuleId(Long ruleId) {
+        this.ruleId = ruleId;
     }
 
     /**

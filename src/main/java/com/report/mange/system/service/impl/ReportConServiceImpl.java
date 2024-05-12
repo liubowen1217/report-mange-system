@@ -95,4 +95,17 @@ public class ReportConServiceImpl implements ReportConService {
         }
         return reportCon;
     }
+
+
+    /**
+     * 删除合同
+     *
+     * @param reportCon
+     * @return
+     */
+    @Override
+    public Integer saveReportConDel(ReportCon reportCon) {
+        reportCon.setIsDeleted(1);
+        return reportConMapper.saveReportConModify(reportCon);
+    }
 }

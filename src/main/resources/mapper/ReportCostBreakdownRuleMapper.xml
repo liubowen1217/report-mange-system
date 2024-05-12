@@ -30,8 +30,9 @@
     <result column="amount" jdbcType="VARCHAR" property="amount" />
     <result column="org_id" jdbcType="VARCHAR" property="orgId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result property="isLevel" column="is_level" jdbcType="VARCHAR" />
     <collection property="detailList" javaType="java.util.List" ofType="com.report.mange.system.dto.ReportCostBreakdownRuleDetailDTO">
-      <id property="id" column="sub_id" jdbcType="BIGINT"/>
+      <id property="id" column="id" jdbcType="BIGINT"/>
       <result property="feeRuleDetailId" column="fee_rule_detail_id" />
       <result property="subFeeRuleCode" column="sub_fee_rule_code" />
       <result property="subSystemSubject" column="sub_system_subject" />
@@ -49,7 +50,7 @@
     t1.fee_rule_id,
     t1.con_id,
     t1.fee_rule_code,
-    t1.system_subject,
+    t3.system_subject,
     t1.standard_proportion,
     t1.budget_proportion,
     t1.amount,
@@ -62,15 +63,19 @@
     t2.sub_standard_proportion,
     t2.sub_budget_proportion,
     t2.sub_amount,
-    t2.sub_remark
+    t2.sub_remark,
+    t3.is_level
     FROM
     report_cost_breakdown_rule t1
-    INNER JOIN report_cost_breakdown_rule_detail t2 ON t1.fee_rule_id = t2.fee_rule_id
+    LEFT JOIN report_cost_breakdown_rule_detail t2 ON t1.fee_rule_id = t2.fee_rule_id AND t2.is_deleted = 0
+    LEFT JOIN  system_subject_basic_info t3 ON t1.fee_rule_code = t3.system_subject_code
     <where>
-      AND t2.is_deleted = 0
       AND t1.is_deleted = 0
       <if test="conId != null">
         AND t1.con_id = #{conId}
+      </if>
+      <if test="recordCode != null and recordCode != ''">
+        AND t1.record_code = #{recordCode}
       </if>
       <if test="feeRuleId != null">
         AND t1.fee_rule_id =  #{feeRuleId}
@@ -78,12 +83,82 @@
     </where>
   </select>
 
-  <select id="queryReportCostBreakdownRule" resultType="com.report.mange.system.dto.ReportCostBreakdownRuleDTO" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+  <select id="queryDefaultReportCostBreakdownRuleNew"  resultType="com.report.mange.system.dto.ReportCostBreakdownRuleDTO">
     SELECT
+    t1.id,
     t1.fee_rule_id,
+    t1.p_fee_rule_id,
     t1.con_id,
     t1.fee_rule_code,
-    t1.system_subject,
+    t3.system_subject,
+    t1.standard_proportion,
+    t1.budget_proportion,
+    t1.amount,
+    t1.org_id,
+    t1.remark,
+    t3.is_level
+    FROM
+    report_cost_breakdown_rule t1
+    LEFT JOIN  system_subject_basic_info t3 ON t1.fee_rule_code = t3.system_subject_code
+    <where>
+      AND t1.is_deleted = 0
+      AND p_fee_rule_id IS NULL
+      <if test="conId != null">
+        AND t1.con_id = #{conId}
+      </if>
+      <if test="recordCode != null and recordCode != ''">
+        AND t1.record_code = #{recordCode}
+      </if>
+      <if test="feeRuleId != null">
+        AND t1.fee_rule_id =  #{feeRuleId}
+      </if>
+      <if test="pFeeRuleId != null">
+        AND t1.p_fee_rule_id =  #{pFeeRuleId}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="queryDefaultReportCostBreakdownRuleDetailNew" resultType="com.report.mange.system.dto.ReportCostBreakdownRuleDetailDTO">
+    SELECT
+    t2.id,
+    t2.fee_rule_code AS sub_fee_rule_code,
+    t2.fee_rule_id AS fee_rule_detail_id,
+    t3.system_subject AS sub_system_subject,
+    t2.standard_proportion AS sub_standard_proportion,
+    t2.budget_proportion AS sub_budget_proportion,
+    t2.amount AS sub_amount,
+    t2.remark AS sub_remark,
+    t3.is_level
+    FROM
+    report_cost_breakdown_rule t2
+    LEFT JOIN  system_subject_basic_info t3 ON t1.fee_rule_code = t3.system_subject_code
+    <where>
+      AND t1.is_deleted = 0
+      <if test="conId != null">
+        AND t1.con_id = #{conId}
+      </if>
+      <if test="recordCode != null and recordCode != ''">
+        AND t1.record_code = #{recordCode}
+      </if>
+      <if test="feeRuleId != null">
+        AND t1.fee_rule_id =  #{feeRuleId}
+      </if>
+      <if test="pFeeRuleId != null">
+        AND t2.p_fee_rule_id =  #{pFeeRuleId}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="queryAllReportCostBreakdownRule" resultType="com.report.mange.system.dto.ReportCostBreakdownRuleDTO" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    t1.id,
+    t1.fee_rule_id,
+    t1.p_fee_rule_id,
+    t1.con_id,
+    t1.fee_rule_code,
+    t2.system_subject,
     t1.standard_proportion,
     t1.budget_proportion,
     t1.amount,
@@ -95,6 +170,34 @@
     INNER JOIN  system_subject_basic_info t2 ON t1.fee_rule_code = t2.system_subject_code
     <where>
       AND is_deleted = 0
+      AND is_enable = 1
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryReportCostBreakdownRule" resultType="com.report.mange.system.dto.ReportCostBreakdownRuleDTO" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
+    SELECT
+    t1.id,
+    t1.fee_rule_id,
+    t1.p_fee_rule_id,
+    t1.con_id,
+    t1.fee_rule_code,
+    t2.system_subject,
+    t1.standard_proportion,
+    t1.budget_proportion,
+    t1.amount,
+    t1.org_id,
+    t1.remark,
+    t2.is_level
+    FROM
+    report_cost_breakdown_rule t1
+    INNER JOIN  system_subject_basic_info t2 ON t1.fee_rule_code = t2.system_subject_code
+    <where>
+      AND is_deleted = 0
+      AND is_enable = 1
+      AND p_fee_rule_id IS NULL
       <if test="conId != null">
         AND con_id = #{conId}
       </if>
@@ -135,6 +238,9 @@
       <if test="remark != null and remark != ''">
         remark,
       </if>
+      <if test="recordCode != null and recordCode != ''">
+        record_code,
+      </if>
       <if test="creator != null and creator != ''">
         creator,
       </if>
@@ -167,6 +273,9 @@
       <if test="remark != null and remark != ''">
         #{remark},
       </if>
+      <if test="recordCode != null and recordCode != ''">
+        #{recordCode},
+      </if>
       <if test="creator != null and creator != ''">
         #{creator},
       </if>
@@ -176,16 +285,47 @@
     </trim>
   </insert>
 
+  <update id="saveReportCostBreakdownRuleModify" parameterType="com.report.mange.system.model.ReportCon">
+    UPDATE report_cost_breakdown_rule
+    <set>
+        is_enable = 0
+    </set>
+    <where>
+      <if test="conId != null ">
+        AND con_id = #{conId}
+      </if>
+      AND is_enable = 1
+    </where>
+  </update>
 
-  <select id="queryBreakdownRuleDrop" resultType="com.report.mange.system.vo.BreakdownRuleVO">
+
+  <select id="queryReportCostBreakdownRuleDetail" resultType="com.report.mange.system.model.ReportCostBreakdownRuleDetail" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
     SELECT
-    fee_rule_code,
-    system_subject
+    id,
+    fee_rule_id AS fee_rule_detail_id,
+    p_fee_rule_id AS fee_rule_id,
+    con_id,
+    fee_rule_code AS sub_fee_rule_code,
+    system_subject AS sub_system_subject,
+    standard_proportion AS sub_standard_proportion,
+    budget_proportion AS sub_budget_proportion,
+    amount AS sub_amount,
+    org_id,
+    remark AS sub_remark
     FROM
     report_cost_breakdown_rule
     <where>
       AND is_deleted = 0
-      AND con_id = 1
+      AND is_enable = 1
+      <if test="conId != null">
+        AND con_id = #{conId}
+      </if>
+      <if test="feeRuleId != null">
+        AND fee_rule_id = #{feeRuleId}
+      </if>
+      <if test="pFeeRuleId != null">
+        AND t2.p_fee_rule_id =  #{pFeeRuleId}
+      </if>
     </where>
   </select>
 </mapper>

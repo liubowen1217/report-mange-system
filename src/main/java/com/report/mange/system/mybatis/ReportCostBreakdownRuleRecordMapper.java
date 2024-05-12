@@ -2,6 +2,7 @@ package com.report.mange.system.mybatis;
 
 
 import com.report.mange.system.dto.AdjustingRecordDTO;
+import com.report.mange.system.dto.ReportCostBreakdownRuleDTO;
 import com.report.mange.system.model.ReportCostBreakdownRule;
 import com.report.mange.system.model.ReportCostBreakdownRuleRecord;
 import tk.mybatis.mapper.common.Mapper;
@@ -14,5 +15,6 @@ public interface ReportCostBreakdownRuleRecordMapper extends Mapper<ReportCostBr
 
     List<AdjustingRecordDTO> queryAdjustingRecords(ReportCostBreakdownRule rule);
 
-    List<ReportCostBreakdownRuleRecord> queryReportCostBreakdownRecordRule(ReportCostBreakdownRuleRecord rule1);
+    List<ReportCostBreakdownRuleDTO> queryReportCostBreakdownRecordRule(ReportCostBreakdownRuleRecord rule1);
+
 }
