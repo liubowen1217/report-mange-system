@@ -7,9 +7,9 @@ import com.report.mange.system.query.ReportConQuery;
 import com.report.mange.system.service.PaymentCollectInfoService;
 import com.report.mange.system.utils.SnowflakeManager;
 import com.report.mange.system.vo.ReportDeptVO;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -54,6 +54,7 @@ public class PaymentCollectInfoServiceImpl implements PaymentCollectInfoService 
      * @return
      */
     @Override
+    @Transactional
     public Integer savePaymentCollectAdd(PaymentCollectInfoDTO paymentCollect) {
         if (paymentCollect.getDeptList() == null) {
             throw new RuntimeException("认领部门不能为空");
@@ -91,23 +92,23 @@ public class PaymentCollectInfoServiceImpl implements PaymentCollectInfoService 
             paymentCollectInfoDeptRel.setPaymentId(paymentId);
             paymentCollectInfoDeptRel.setDeptId(Long.parseLong(deptid));
             paymentCollectInfoDeptRelMapper.savePaymentCollectInfoDeptRelAdd(paymentCollectInfoDeptRel);
+        }
 
-            //查询认领部门对应的系统科目信息
-            SystemSubjectByDeptDTO rule = new SystemSubjectByDeptDTO();
-            rule.setConId(paymentCollect.getConId());
-            rule.setDeptId(Long.parseLong(deptid));
-            List<ReportCostBreakdownRuleDTO> systemSubject = paymentCollectInfoDeptRelMapper.getSystemSubjectByDept(rule);
-            for (ReportCostBreakdownRuleDTO reportCostBreakdownRuleDTO : systemSubject) {
-                //进行数据计算当前部门占领的回款金额
-                BigDecimal amout = new BigDecimal(collectAmout).divide(new BigDecimal(reportCostBreakdownRuleDTO.getStandardProportion())).multiply(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
-                PaymentCollectResult result = new PaymentCollectResult();
-                result.setPaymentResultId(snowflakeManager.nextValue());
-                result.setConId(reportCostBreakdownRuleDTO.getConId());
-                result.setPaymentId(paymentId);
-                result.setFeeRuleId(reportCostBreakdownRuleDTO.getFeeRuleId());
-                result.setAllocatAmount(amout.toString());
-                paymentCollectResultMapper.savePaymentCollectResultAdd(result);
-            }
+
+        //查询认领部门对应的系统科目信息
+        SystemSubjectByDeptDTO rule = new SystemSubjectByDeptDTO();
+        rule.setConId(paymentCollect.getConId());
+        List<ReportCostBreakdownRuleDTO> systemSubject = paymentCollectInfoDeptRelMapper.getSystemSubjectByDept(rule);
+        for (ReportCostBreakdownRuleDTO reportCostBreakdownRuleDTO : systemSubject) {
+            //进行数据计算当前部门占领的回款金额
+            BigDecimal amout = new BigDecimal(collectAmout).divide(new BigDecimal(reportCostBreakdownRuleDTO.getStandardProportion()),4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100));
+            PaymentCollectResult result = new PaymentCollectResult();
+            result.setPaymentResultId(snowflakeManager.nextValue());
+            result.setConId(reportCostBreakdownRuleDTO.getConId());
+            result.setPaymentId(paymentId);
+            result.setFeeRuleId(reportCostBreakdownRuleDTO.getFeeRuleId());
+            result.setAllocatAmount(amout.toString());
+            paymentCollectResultMapper.savePaymentCollectResultAdd(result);
         }
 
         return paymentCollectInfoMapper.savePaymentCollectAdd(payment);
@@ -174,7 +175,7 @@ public class PaymentCollectInfoServiceImpl implements PaymentCollectInfoService 
             List<ReportDept> deptList = paymentCollectInfoDeptRelMapper.queryPaymentCollectInfoDept(costBreakdownRule.getPaymentId());
 
             List<String> deptName = new ArrayList<>();
-            List<String> userName = new ArrayList<>();
+            Set<String> userName = new HashSet<>();
             for (ReportDept reportDept : deptList) {
                 ReportUserDTO userDTO = new ReportUserDTO();
                 userDTO.setRuleId(costBreakdownRule.getFeeRuleId());
@@ -184,7 +185,7 @@ public class PaymentCollectInfoServiceImpl implements PaymentCollectInfoService 
                 deptName.add(reportDept.getDeptName());
             }
 
-            String userNameCount = String.join(" ", userName);
+            String userNameCount = userName.stream().collect(Collectors.joining(" "));
             String deptNameCount = String.join(" ", deptName);
             costBreakdownRule.setpDeptName(deptNameCount);
             costBreakdownRule.setpUserName(userNameCount);

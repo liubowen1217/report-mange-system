@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
  * @date 2024/04/17 19:27
  */
 @Service
-@Primary
 public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRuleService {
 
     @Resource
@@ -185,7 +184,9 @@ public class ReportCostBreakdownRuleServiceImpl implements ReportCostBreakdownRu
             }
 
             //禁用费用明细
-            reportCostBreakdownRuleMapper.saveReportCostBreakdownRuleModify(comId);
+            ReportCostBreakdownRule modifyRule = new ReportCostBreakdownRule();
+            modifyRule.setConId(comId);
+            reportCostBreakdownRuleMapper.saveReportCostBreakdownRuleModify(modifyRule);
 
             //查询当前费用规则明细
             ReportCostBreakdownRuleDetail ruleDetail = new ReportCostBreakdownRuleDetail();

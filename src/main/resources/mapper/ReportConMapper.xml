@@ -72,6 +72,9 @@
       <if test="taxAmt != null and taxAmt != ''">
         tax_amt,
       </if>
+      <if test="collectAmount != null and collectAmount != ''">
+        collect_amount,
+      </if>
       <if test="submitProfitRate != null and submitProfitRate != ''">
         submit_profit_rate,
       </if>
@@ -133,6 +136,9 @@
       </if>
       <if test="taxAmt != null and taxAmt != ''">
         #{taxAmt},
+      </if>
+      <if test="collectAmount != null and collectAmount != ''">
+        collect_amount = #{collectAmount},
       </if>
       <if test="submitProfitRate != null and submitProfitRate != ''">
         #{submitProfitRate},

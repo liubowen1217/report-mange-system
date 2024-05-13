@@ -1,5 +1,8 @@
 package com.report.mange.system.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,22 +16,26 @@ public class PaymentCollectDetailDTO {
     /**
      * 费用规则id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long feeRuleId;
 
     /**
      * 上级费用规则id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long pFeeRuleId;
 
     /**
      * 回款明细ID
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long paymentId;
 
 
     /**
      * 合同ID
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long conId;
 
     /**

@@ -37,7 +37,10 @@ public class ReportConServiceImpl implements ReportConService {
      */
     @Override
     public Integer saveReportConAdd(ReportCon reportCon) {
+        UserAccountDTO user = (UserAccountDTO) StpUtil.getSession().get("user");
+        reportCon.setCreator(user.getuName());
         reportCon.setConId(snowflakeManager.nextValue());
+        reportCon.setCollectAmount("0");
         return reportConMapper.saveReportConAdd(reportCon);
     }
 
@@ -50,6 +53,8 @@ public class ReportConServiceImpl implements ReportConService {
      */
     @Override
     public Integer saveReportConModify(ReportCon reportCon) {
+        UserAccountDTO user = (UserAccountDTO) StpUtil.getSession().get("user");
+        reportCon.setModifier(user.getuName());
         return reportConMapper.saveReportConModify(reportCon);
     }
 
@@ -105,6 +110,8 @@ public class ReportConServiceImpl implements ReportConService {
      */
     @Override
     public Integer saveReportConDel(ReportCon reportCon) {
+        UserAccountDTO user = (UserAccountDTO) StpUtil.getSession().get("user");
+        reportCon.setModifier(user.getuName());
         reportCon.setIsDeleted(1);
         return reportConMapper.saveReportConModify(reportCon);
     }

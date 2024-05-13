@@ -121,31 +121,15 @@
 
   <select id="queryDefaultReportCostBreakdownRuleDetailNew" resultType="com.report.mange.system.dto.ReportCostBreakdownRuleDetailDTO">
     SELECT
-    t2.id,
-    t2.fee_rule_code AS sub_fee_rule_code,
-    t2.fee_rule_id AS fee_rule_detail_id,
+    t3.id,
+    t3.system_subject_code AS subFeeRuleCode,
     t3.system_subject AS sub_system_subject,
-    t2.standard_proportion AS sub_standard_proportion,
-    t2.budget_proportion AS sub_budget_proportion,
-    t2.amount AS sub_amount,
-    t2.remark AS sub_remark,
     t3.is_level
     FROM
-    report_cost_breakdown_rule t2
-    LEFT JOIN  system_subject_basic_info t3 ON t1.fee_rule_code = t3.system_subject_code
+    system_subject_basic_info t3
     <where>
-      AND t1.is_deleted = 0
-      <if test="conId != null">
-        AND t1.con_id = #{conId}
-      </if>
-      <if test="recordCode != null and recordCode != ''">
-        AND t1.record_code = #{recordCode}
-      </if>
-      <if test="feeRuleId != null">
-        AND t1.fee_rule_id =  #{feeRuleId}
-      </if>
-      <if test="pFeeRuleId != null">
-        AND t2.p_fee_rule_id =  #{pFeeRuleId}
+      <if test="feeRuleCode != null and feeRuleCode != ''">
+        AND t3.parent_system_subject_code = #{feeRuleCode}
       </if>
     </where>
   </select>
@@ -213,9 +197,11 @@
   <insert id="saveReportCostBreakdownRuleAdd" parameterType="com.report.mange.system.model.ReportCostBreakdownRuleDetail">
     insert into report_cost_breakdown_rule
     <trim prefix="(" suffix=")" suffixOverrides=",">
-
       <if test="feeRuleId != null">
         fee_rule_id,
+      </if>
+      <if test="pFeeRuleId != null">
+        p_fee_rule_id,
       </if>
       <if test="conId != null">
         con_id,
@@ -252,6 +238,9 @@
       <if test="feeRuleId != null">
         #{feeRuleId},
       </if>
+      <if test="pFeeRuleId != null">
+        #{pFeeRuleId},
+      </if>
       <if test="conId != null">
         #{conId},
       </if>
@@ -285,10 +274,13 @@
     </trim>
   </insert>
 
-  <update id="saveReportCostBreakdownRuleModify" parameterType="com.report.mange.system.model.ReportCon">
+  <update id="saveReportCostBreakdownRuleModify" parameterType="com.report.mange.system.model.ReportCostBreakdownRule">
     UPDATE report_cost_breakdown_rule
     <set>
         is_enable = 0
+      <if test="modifier != null and modifier != ''">
+        modifier = #{modifier},
+      </if>
     </set>
     <where>
       <if test="conId != null ">
@@ -324,7 +316,7 @@
         AND fee_rule_id = #{feeRuleId}
       </if>
       <if test="pFeeRuleId != null">
-        AND t2.p_fee_rule_id =  #{pFeeRuleId}
+        AND p_fee_rule_id =  #{pFeeRuleId}
       </if>
     </where>
   </select>

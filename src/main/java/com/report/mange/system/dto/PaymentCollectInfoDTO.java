@@ -1,5 +1,9 @@
 package com.report.mange.system.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,18 +15,21 @@ public class PaymentCollectInfoDTO {
      * 主键
      */
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /**
      * 回款信息id
      */
     @Column(name = "payment_id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long paymentId;
 
     /**
      * 合同ID
      */
     @Column(name = "con_id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long conId;
 
     /**
@@ -46,6 +53,7 @@ public class PaymentCollectInfoDTO {
      * 到账日期
      */
     @Column(name = "receipt_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date receiptDate;
 
     /**
@@ -68,6 +76,7 @@ public class PaymentCollectInfoDTO {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date createTime;
 
     /**
@@ -79,6 +88,7 @@ public class PaymentCollectInfoDTO {
      * 修改时间
      */
     @Column(name = "update_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date updateTime;
 
     /**
