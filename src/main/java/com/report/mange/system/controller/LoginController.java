@@ -26,7 +26,7 @@ public class LoginController {
 
     @ApiOperation("登录")
     @PostMapping("/doLogin")
-    public ApiResult<Integer> doLogin(@RequestBody ReportAccount account) throws Exception {
+    public ApiResult<UserAccountDTO> doLogin(@RequestBody ReportAccount account) throws Exception {
         if (StringUtils.isBlank(account.getuPassword())) {
             return ApiResult.error("密码不能为空");
         }
@@ -45,7 +45,7 @@ public class LoginController {
             StpUtil.login(accountResult.getUserAcctId());
             StpUtil.getSession().set("user", accountResult);
 //            第三步：返回数据给前端。SaReasult是对返回结果的简单封装。
-            return ApiResult.ok();
+            return ApiResult.ok(accountResult);
         }
         return ApiResult.error("登录失败");
     }
